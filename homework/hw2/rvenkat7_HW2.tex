@@ -90,6 +90,93 @@
 				[2,]	&	4		&	5		&	6		\\ \relax
 				[3,]	&	7		&	8		&	9		\\ \relax
 				\end{array}$
+
+				\item
+				Scalar multiplication of output matrix with itself. \\
+				\textbf{Ans:} \\
+				x * x \\
+				$\begin{array}{cccc}
+				~		&	[,1]	&	[,2]	&	[,3]	\\ \relax
+				[1,]	&	1		&	16		&	49		\\ \relax
+				[2,]	&	4		&	25		&	64		\\ \relax
+				[3,]	&	9		&	36		&	81		\\ \relax
+				\end{array}$
+
+				\item
+				Matrix multiplication of output matrix with itself. \\
+				\textbf{Ans:} \\
+				x \%*\% x \\
+				$\begin{array}{cccc}
+				~		&	[,1]	&	[,2]	&	[,3]	\\ \relax
+				[1,]	&	30		&	66		&	102		\\ \relax
+				[2,]	&	36		&	81		&	126		\\ \relax
+				[3,]	&	42		&	96		&	150		\\ \relax
+				\end{array}$
+
+				\item
+				Cross product of the output matrix from 1. \\
+				\textbf{Ans:} \\
+				crossprod(x) \\
+				$\begin{array}{cccc}
+				~		&	[,1]	&	[,2]	&	[,3]	\\ \relax
+				[1,]	&	14		&	32		&	50		\\ \relax
+				[2,]	&	32		&	77		&	122		\\ \relax
+				[3,]	&	50		&	122		&	194		\\ \relax
+				\end{array}$
+
+				\item
+				Check if a matrix is a square matrix. \\
+				\textbf{Ans:} \\
+				\begin{verbatim}
+function checksqmatrix(mat) 
+{ 
+  if(dim(mat)[1]==dim(mat)[2]) 
+  { 
+    print("It is a square matrix!") 
+  } 
+  else 
+  { 
+    print("It is NOT a square matrix") 
+  } 
+} 
+
+> checksqmatrix(x)
+[1] "It is a square matrix!"
+
+> checksqmatrix(matrix(c(1:10),2,5))
+[1] "It is NOT a square matrix"
+\end{verbatim}
+				
+				\item
+				Inverse of a matrix \\
+				\textbf{Ans:} \\
+				solve(x) \\
+				Since this matrix has determinant 0 the inverse is not defined. \\
+				Error in solve.default(x) :  \\
+  				Lapack routine dgesv: system is exactly singular: U[3,3] = 0 \\
+
+  				\item
+  				Identity of a matrix. \\
+  				\textbf{Ans:} \\
+
+  				\item
+  				Sum of all elements in the matrix (use a for/while loop) \\
+\begin{verbatim}
+matrixsum <- function (mat) {
+  i<-1
+  sum<-0
+  while(i<=dim(mat)[1]*dim(mat)[2])
+  {
+    sum<-sum+mat[i]
+    i<-i+1
+  }
+  print (paste(sum, "is the sum of elements"))
+}
+
+> matrixsum(x)
+[1] "45 is the sum of elements"
+\end{verbatim}
+
 			\end{enumerate}
 		\end{enumerate}
 \end{document}		
