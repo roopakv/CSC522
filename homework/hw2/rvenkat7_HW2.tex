@@ -1,0 +1,95 @@
+\documentclass[fontsize=10pt]{scrartcl}
+
+\usepackage{enumitem}
+	\setenumerate{listparindent=\parindent}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{placeins}
+\usepackage{hyperref}
+
+\usepackage[margin=1.0in]{geometry}
+
+\newcommand{\code}{\texttt}
+
+\begin{document}
+
+	\title{CSC 522 : Automated Learning and Data Analysis}
+	\subtitle{Homework 2}
+	\author{Roopak Venkatakrishnan - rvenkat7@ncsu.edu}
+	\maketitle
+
+	\section{Question 1}
+		Write code in R or Matlab to perform each of the following tasks:
+		\begin{enumerate}
+			\item
+			Generate a $3 \times 3$ matrix with input containing the sequence 1, 2, ... 9. \\
+			\textbf{Ans:} $x \leftarrow matrix(c(1:9),3,3)$
+			\item
+			\begin{enumerate}
+				\item
+				Access elements from the 2nd and 3rd columns only. \\
+				\textbf{Ans:} \\
+				2nd column alone : x[,2] $\implies$ [1] 4 5 6\\
+				3rd column alone : x[,3] $\implies$ [1] 7 8 9\\ 
+				both columns     : x[,2:3] \\
+				$\implies$ \\
+				
+				$\begin{array}{ccc} 
+					~		&	[,1]	&	[,2]	\\ \relax
+					[1,]	&	4	 	&	7		\\ \relax
+					[2,]	&	5		&	8		\\ \relax
+					[3,]	&	6		&	9		\\ \relax
+				\end{array}$
+
+				
+				\item
+				Access elements of the 2nd and 3rd rows only \\
+				\textbf{Ans:} \\
+				2nd row alone : x[2,] $\implies$ [1] 2 5 8\\
+				3rd row alone : x[3,] $\implies$ [1] 3 6 9\\ 
+				both rows     : x[2:3,] \\
+				$\implies$ \\
+				$\begin{array}{cccc}
+					~		&	[,1]	&	[,2]	&	[,3]	\\ \relax
+					[1,]	&	2		&	5		&	8		\\ \relax
+					[2,]	&	3		&	6		&	9		\\ \relax
+				\end{array}$
+
+
+				\item
+				Access rows 1 and 3 only? (see rbind() function in R and vertcat() in matlab) \\
+				\textbf{Ans:} \\
+				$x2 \leftarrow rbind(x[2,],x[3,])$ \\
+				$\implies$ \\
+				$\begin{array}{cccc}
+					~		&	[,1]	&	[,2]	&	[,3]	\\ \relax
+					[1,]	&	1		&	4		&	7		\\ \relax
+					[2,]	&	3		&	6		&	9		\\ \relax
+				\end{array}$
+
+				\item
+				Calculate sum of the 2nd row, the diagonal and the 3rd column in the matrix. \\
+				\textbf{Ans:} \\
+				x[2,] + x[,3] + diag(x) \\
+				$\implies$  [1] 10 18 26 \\
+
+				\item
+				Identify row and column dimensions of the matrix.\\
+				\textbf{Ans:} \\
+				dim(x) \\
+				$\implies$ [1] 3 3 \\
+
+				\item
+				Transpose of a matrix. \\
+				\textbf{Ans:} \\
+				t(x) \\
+				$\begin{array}{cccc}
+				~		&	[,1]	&	[,2]	&	[,3]	\\ \relax
+				[1,]	&	1		&	2		&	3		\\ \relax
+				[2,]	&	4		&	5		&	6		\\ \relax
+				[3,]	&	7		&	8		&	9		\\ \relax
+				\end{array}$
+			\end{enumerate}
+		\end{enumerate}
+\end{document}		
