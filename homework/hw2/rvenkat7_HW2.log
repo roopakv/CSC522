@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.9.8)  22 JAN 2013 21:13
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.9.8)  22 JAN 2013 21:57
 entering extended mode
 **rvenkat7_HW2.tex
 ("D:\Courses\data_mining - CSC522\homework\hw2\rvenkat7_HW2.tex"
@@ -532,7 +532,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 471--472
 
  []
 
-[8]
+[8] [9]
 Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ˜ in font cmr10!
@@ -540,57 +540,110 @@ Missing character: There is no â in font cmr10!
 Missing character: There is no € in font cmr10!
 Missing character: There is no ™ in font cmr10!
 
-Underfull \hbox (badness 10000) in paragraph at lines 519--522
+Underfull \hbox (badness 10000) in paragraph at lines 520--523
 
  []
 
-<resources/minkowski.png, id=76, 864.22874pt x 553.06625pt>
+<resources/minkowski.png, id=80, 864.22874pt x 553.06625pt>
 File: resources/minkowski.png Graphic file (type png)
 
 <use resources/minkowski.png>
-Package pdftex.def Info: resources/minkowski.png used on input line 531.
+Package pdftex.def Info: resources/minkowski.png used on input line 532.
 (pdftex.def)             Requested size: 432.11331pt x 276.53244pt.
- [9]
-Underfull \hbox (badness 10000) in paragraph at lines 536--539
-
- []
-
-<resources/tchebyshev.png, id=82, 888.31876pt x 553.06625pt>
-File: resources/tchebyshev.png Graphic file (type png)
-
-<use resources/tchebyshev.png>
-Package pdftex.def Info: resources/tchebyshev.png used on input line 548.
-(pdftex.def)             Requested size: 444.1583pt x 276.53244pt.
  [10pdfTeX warning (ext4): destination with the same identifier (name{figure.2}
 ) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.552 
-       <D:/Courses/data_mining - CSC522/homework/hw2/resources/minkowski.png>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 555.
+l.537 			\newpage
+                  <D:/Courses/data_mining - CSC522/homework/hw2/resources/minko
+wski.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 538--539
 
-[11pdfTeX warning (ext4): destination with the same identifier (name{figure.3})
- has been already used, duplicate ignored
+ []
+
+<resources/tchebyshev.png, id=88, 888.31876pt x 553.06625pt>
+File: resources/tchebyshev.png Graphic file (type png)
+
+<use resources/tchebyshev.png>
+Package pdftex.def Info: resources/tchebyshev.png used on input line 550.
+(pdftex.def)             Requested size: 444.1583pt x 276.53244pt.
+ [11pdfTeX warning (ext4): destination with the same identifier (name{figure.3}
+) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.555 \end{document}
-                     <D:/Courses/data_mining - CSC522/homework/hw2/resources/tc
-hebyshev.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 555.
+l.555 			\newpage
+                  <D:/Courses/data_mining - CSC522/homework/hw2/resources/tcheb
+yshev.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 556--557
+
+ []
+
+<resources/cosine.png, id=95, 888.31876pt x 553.06625pt>
+File: resources/cosine.png Graphic file (type png)
+
+<use resources/cosine.png>
+Package pdftex.def Info: resources/cosine.png used on input line 569.
+(pdftex.def)             Requested size: 444.1583pt x 276.53244pt.
+ [12pdfTeX warning (ext4): destination with the same identifier (name{figure.4}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.574 			\newpage
+                  <D:/Courses/data_mining - CSC522/homework/hw2/resources/cosin
+e.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 575--576
+
+ []
+
+<resources/manhattan.png, id=102, 888.31876pt x 553.06625pt>
+File: resources/manhattan.png Graphic file (type png)
+
+<use resources/manhattan.png>
+Package pdftex.def Info: resources/manhattan.png used on input line 587.
+(pdftex.def)             Requested size: 444.1583pt x 276.53244pt.
+ [13pdfTeX warning (ext4): destination with the same identifier (name{figure.5}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.593 			\newpage
+                  <D:/Courses/data_mining - CSC522/homework/hw2/resources/manha
+ttan.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 594--595
+
+ []
+
+<resources/euclidean.png, id=110, 888.31876pt x 553.06625pt>
+File: resources/euclidean.png Graphic file (type png)
+
+<use resources/euclidean.png>
+Package pdftex.def Info: resources/euclidean.png used on input line 606.
+(pdftex.def)             Requested size: 444.1583pt x 276.53244pt.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 614.
+ [14pdfTeX warning (ext4): destination with the same identifier (name{figure.6}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.614 \end{document}
+                     <D:/Courses/data_mining - CSC522/homework/hw2/resources/eu
+clidean.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 614.
  ("D:\Courses\data_mining - CSC522\homework\hw2\rvenkat7_HW2.aux")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 555.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 555.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 614.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 614.
 Package rerunfilecheck Info: File `rvenkat7_HW2.out' has not changed.
 (rerunfilecheck)             Checksum: 0D238B94B7D65C2A3194A616F093A372;92.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 555.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 614.
  ) 
 Here is how much of TeX's memory you used:
- 7714 strings out of 494045
- 114419 string characters out of 3148385
+ 7735 strings out of 494045
+ 114821 string characters out of 3148385
  234882 words of memory out of 3000000
- 10894 multiletter control sequences out of 15000+200000
+ 10906 multiletter control sequences out of 15000+200000
  9148 words of font info for 36 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
  36i,7n,36p,245b,704s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -602,9 +655,9 @@ nts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
 /public/amsfonts/cm/cmssbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/publi
 c/amsfonts/cm/cmsy10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfon
 ts/cm/cmtt10.pfb>
-Output written on rvenkat7_HW2.pdf (11 pages, 141563 bytes).
+Output written on rvenkat7_HW2.pdf (14 pages, 157205 bytes).
 PDF statistics:
- 133 PDF objects out of 1000 (max. 8388607)
- 38 named destinations out of 1000 (max. 500000)
- 32 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 156 PDF objects out of 1000 (max. 8388607)
+ 44 named destinations out of 1000 (max. 500000)
+ 47 words of extra memory for PDF output out of 10000 (max. 10000000)
 

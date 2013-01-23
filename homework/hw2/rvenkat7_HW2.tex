@@ -507,6 +507,7 @@ rdist(vals,matrix(c(5,1.5),1,2))
 
 
 \end{verbatim}
+\newpage
 				\item
 				For each distance measure, identify the 10 points from the dataset that are the closest to the point(5,1.5).
 				\begin{itemize}
@@ -533,15 +534,16 @@ rdist(vals,matrix(c(5,1.5),1,2))
 				\end{center}
 			\end{figure}
 
-			. \\
-				. \\
-				\textbf{\large Tchebyshev Distance} \\
+			\newpage
+			\textbf{\large Tchebyshev Distance} \\
+
 \begin{verbatim}
 > tcheby1 <- cbind(vals,tchebyshev)
 > tcheby2<-head(tcheby1[order(tchebyshev),],10)
 > plot(tcheby2[["V1"]],tcheby2[["V2"]],xlab="V1",ylab="V2"
 +								,main="Graph for Tchebyshev Distance")
 > points(5,1.5,type="b",pch=4,col="#660000",cex=3)
+
 \end{verbatim}
 			\begin{figure}[H]
 				\begin{center}
@@ -549,6 +551,63 @@ rdist(vals,matrix(c(5,1.5),1,2))
 					\caption{The plot for Tchebyshev Distance}
 				\end{center}
 			\end{figure}
+
+			\newpage
+			\textbf{\large Cosine Distance} \\
+
+				Using Cosine Distance as opposde to cosine similarity.
+\begin{verbatim}
+> cos1 <- cbind(vals,cosdist)
+> cos2<-head(cos1[order(cosdist),],10)
+> plot(cos2[["V1"]],cos2[["V2"]],xlab="V1",ylab="V2",
++				main="Graph for Cosine Distance")
+> points(5,1.5,type="b",pch=4,col="#660000",cex=3)
+
+\end{verbatim}
+			\begin{figure}[H]
+				\begin{center}
+					\includegraphics[scale=.5]{resources/cosine.png}
+					\caption{The plot for Cosine Distance}
+				\end{center}
+			\end{figure}
+
+			\newpage
+			\textbf{\large Manhattan Distance} \\
+
+\begin{verbatim}
+> manh1 <- cbind(vals,manhattan)
+> manh2<-head(manh1[order(manhattan),],10)
+> plot(manh2[["V1"]],manh2[["V2"]],xlab="V1",ylab="V2"
++	,main="Graph for Manhattan Distance")
+> points(5,1.5,type="b",pch=4,col="#660000",cex=3)
+
+\end{verbatim}
+			\begin{figure}[H]
+				\begin{center}
+					\includegraphics[scale=.5]{resources/manhattan.png}
+					\caption{The plot for Manhattan Distance}
+				\end{center}
+			\end{figure}
+
+
+			\newpage
+			\textbf{\large Euclidean Distance} \\
+
+\begin{verbatim}
+> euc1 <- cbind(vals,euclid)
+> euc2<-head(euc1[order(euclid),],10)
+> plot(euc2[["V1"]],euc2[["V2"]],xlab="V1",ylab="V2"
++					,main="Graph for Euclidean Distance")
+> points(5,1.5,type="b",pch=4,col="#660000",cex=3)
+
+\end{verbatim}
+			\begin{figure}[H]
+				\begin{center}
+					\includegraphics[scale=.5]{resources/euclidean.png}
+					\caption{The plot for Manhattan Distance}
+				\end{center}
+			\end{figure}
+
 
 			\end{enumerate}
 	\end{enumerate}
