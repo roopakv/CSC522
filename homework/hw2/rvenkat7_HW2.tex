@@ -465,7 +465,91 @@ rdist(vals,matrix(c(5,1.5),1,2))
 [256] 0.6 0.2 0.3 0.3 1.0 0.5 0.4 0.6 0.5 0.9 0.8 0.3 0.7 0.8 0.0
 [271] 0.8 0.5 0.5 0.3 0.6 0.3 0.3 0.3 0.6 0.1 0.4 0.5 0.7 0.0 0.1
 [286] 0.8 0.9 0.3 0.3 0.6 0.9 0.8 0.4 0.8 1.0 0.8 0.4 0.5 0.8 0.3
+
+
 \end{verbatim}
+			\textbf{\large Minkowski Distance(p=3)} \\
+
+\begin{verbatim}
+> vals2 <- cbind(abs(vals$V1-5),abs(vals$V2-1.5))
+> minkowski <- (vals2[,1]^3 + vals2[,2]^3)^(1/3)
+> minkowski
+  [1] 3.6556427 3.6556427 3.7527387 3.5587893 3.6556427
+  [6] 3.3402479 3.6439068 3.5587893 3.6556427 3.5731281
+ [11] 3.5587893 3.4622056 3.6692360 3.9592317 3.8500534
+ [16] 3.5358492 3.7321283 3.6439068 3.3520667 3.5464025
+ [21] 3.3659226 3.5358492 4.0452569 3.3303295 3.1744052
+ [26] 3.4622056 3.4379542 3.5587893 3.6556427 3.4622056
+ [31] 3.4622056 3.5358492 3.5731281 3.6556427 3.5587893
+ [36] 3.8500534 3.7527387 3.6692360 3.7527387 3.5587893
+ [41] 3.7416049 3.7416049 3.7527387 3.4208921 3.1454962
+ [46] 3.6439068 3.4622056 3.6556427 3.5587893 3.6556427
+ [51] 0.3036589 0.5000000 0.1000000 1.0026596 0.4000000
+ [56] 0.5104469 0.3036589 1.7142970 0.4160168 1.1002754
+ [61] 1.5182945 0.8000000 1.0400419 0.3036589 1.4013592
+ [66] 0.6009245 0.5000000 0.9487518 0.5000000 1.1173556
+ [71] 0.3271066 1.0026596 0.1000000 0.3779763 0.7054004
+ [76] 0.6009245 0.2080084 0.2000000 0.5000000 1.5182945
+ [81] 1.2146356 1.3242015 1.1073883 0.1259921 0.5000000
+ [86] 0.5013298 0.3000000 0.6073178 0.9032802 1.0026596
+ [91] 0.6240251 0.4020726 1.0089202 1.7142970 0.8041452
+ [96] 0.8138223 0.8041452 0.7054004 2.0053192 0.9032802
+[101] 1.2599210 0.4020726 0.9813199 0.6240251 0.9491220
+[106] 1.6276446 0.5104469 1.3053038 0.8138223 1.3259101
+[111] 0.5013298 0.4497941 0.6986368 0.5000000 0.9004113
+[116] 0.8138223 0.5336803 1.7386752 1.9461462 0.0000000
+[121] 0.9491220 0.5013298 1.7142970 0.3036589 0.8237661
+[126] 1.0089202 0.3271066 0.3036589 0.7559526 0.8005205
+[131] 1.1173556 1.4209436 0.8237661 0.1000000 0.6009245
+[136] 1.2260507 0.9813199 0.5336803 0.3271066 0.6542133
+[141] 0.9813199 0.8005205 0.4020726 1.0746258 1.1032959
+[146] 0.8041452 0.4000000 0.5104469 0.8320335 0.3036589
+
+
+\end{verbatim}
+				\item
+				For each distance measure, identify the 10 points from the dataset that are the closest to the point(5,1.5).
+				\begin{itemize}
+					\item
+					Create plots, one for each distance measure. Place an ‘X’ for (5,1.5) and mark the 10 closest points. To mark them, you could place a circle or any other shape over the point.
+
+					\item
+					Verify if the set of points is the same across all the distance measures.
+				\end{itemize}
+				. \\
+				. \\
+				\textbf{\large Minkowski Distance(p=3)} \\
+\begin{verbatim}
+> mink2 <- cbind(vals,minkowski)
+> mink3<-head(mink2[order(minkowski),],10)
+> plot(mink3[["V1"]],mink3[["V2"]],xlab="V1",ylab="V2",
++							main="Graph for Minkowski Distance",xlim=c(4.5,5.5),ylim=c(1.35,1.8))
+> points(5,1.5,type="b",pch=4,col="#660000",cex=3)
+\end{verbatim}
+			\begin{figure}[H]
+				\begin{center}
+					\includegraphics[scale=.5]{resources/minkowski.png}
+					\caption{The plot for Minkowski Distance}
+				\end{center}
+			\end{figure}
+
+			. \\
+				. \\
+				\textbf{\large Tchebyshev Distance} \\
+\begin{verbatim}
+> tcheby1 <- cbind(vals,tchebyshev)
+> tcheby2<-head(tcheby1[order(tchebyshev),],10)
+> plot(tcheby2[["V1"]],tcheby2[["V2"]],xlab="V1",ylab="V2"
++								,main="Graph for Tchebyshev Distance")
+> points(5,1.5,type="b",pch=4,col="#660000",cex=3)
+\end{verbatim}
+			\begin{figure}[H]
+				\begin{center}
+					\includegraphics[scale=.5]{resources/tchebyshev.png}
+					\caption{The plot for Tchebyshev Distance}
+				\end{center}
+			\end{figure}
+
 			\end{enumerate}
 	\end{enumerate}
 \end{document}		
