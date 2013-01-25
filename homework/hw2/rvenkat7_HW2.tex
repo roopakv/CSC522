@@ -611,4 +611,150 @@ rdist(vals,matrix(c(5,1.5),1,2))
 
 			\end{enumerate}
 	\end{enumerate}
+
+	\section{Question 3}
+
+	In this question you will be asked to summarize and explore data in file labelled hw1q3.csv, available on the course moodle site. This file contains 2 columns of 1000 data points each.
+
+	\begin{enumerate}
+		\item
+		Load the data contained in the file using your platform of choice. Compute and report the mean, median, standard deviation, and the range (i.e. the minimum and maximum) for each variable x1, x2. As discussed in class, please be sure to use $s = \frac{1}{n-1} \sum_{t=1}^{n} (x_i - \bar{x})^2$ to compute the standard deviation. You don’t have to do this by hand, but please verify any approach you use is based on this formulation. Report each estimate to 3 decimal places.
+		\begin{itemize}
+			
+			\item
+			\textbf{\large Mean} \\
+\begin{verbatim}
+> read.csv(file.choose(),header=T)
+> round(mean(vals$x1),digits=3)
+[1] 5.032
+> round(mean(vals$x2),digits=3)
+[1] 4.774
+\end{verbatim}
+
+			\item
+			\textbf{\large Median} \\
+\begin{verbatim}
+> round(median(vals$x1),digits=3)
+[1] 5.052
+> round(median(vals$x2),digits=3)
+[1] 2.567
+\end{verbatim}
+
+			\item
+			\textbf{\large Std. Deviation} \\
+\begin{verbatim}
+> round(sd(vals$x1),digits=3)
+[1] 1.464
+> round(sd(vals$x2),digits=3)
+[1] 5.242
+\end{verbatim}
+
+			\item
+			\textbf{\large Range} \\
+\begin{verbatim}
+> round(range(vals$x1),digits=3)
+[1] -0.123  9.701
+> round(range(vals$x2),digits=3)
+[1] -4.291 15.531
+\end{verbatim}
+
+		\end{itemize}
+
+		\item
+		Compute the quantiles for each variable. The quantiles of data set are the 0,25,50,75,and 100 percentiles. Report each to 3 decimal places: \\
+\begin{verbatim}
+> round(quantile(vals$x1),digits=3)
+    0%    25%    50%    75%   100% 
+-0.123  4.083  5.052  5.991  9.701 
+> round(quantile(vals$x2),digits=3)
+    0%    25%    50%    75%   100% 
+-4.291 -0.132  2.567  9.957 15.531 
+\end{verbatim}
+		
+		\item
+		Create a histogram (see hist() in R and hist() in Matlab) for each variable using 10 bins. The scale of the y-axis should be in terms of density, not frequncy. Also, overlay a hypothetical ‘true’ density as a line. For this problem investigate the claim that the data were generated from a normal density with mean (represented by $\mu$) 5 and and standard deviation (represented by $\sigma$) of 1.5. The normal probability density function (pdf) is given by: \\
+		\begin{equation*}
+			f(x) = \frac{1}{\sqrt{2\pi\sigma}}e^{\frac{-(x-\mu)^2}{2\sigma^2}}
+		\end{equation*}
+		This function indicates the y-value for any x-value in the data set. You are asked to plot this line, f(x), and overlay it on each histogram. This plot will be a good way to visually inspect if a variable comes from a normal distribution with the indicated parameters. Note: you may do this anyway you wish, so if there are built in functions that will help you accomplish this, you are free to use them. \\
+\begin{verbatim}
+> hist(vals$x1,freq=F,main="Histogram (Density Based)",xlab="Values of x1",breaks=10)
+> y<-exp(-(vals$x1-5)^2/(2*1.5*1.5))/(1.5 * sqrt(2*pi))
+> lines(sort(vals$x1),y[order(vals$x1)],col="red")
+\end{verbatim}
+		\begin{figure}[H]
+			\begin{center}
+				\includegraphics[scale=.5]{resources/histogram_q3.png}
+				\caption{The Histogram for values of x1}
+			\end{center}
+		\end{figure}
+
+		Replicating the same for the values of x2 we get different results. This is probably because of the reason that the mean for x2 is not 5 and the standard deviation is not 1.5 either. The density() function is plotted in blue to show how the density fucntion would look if superimposed on the graph.
+
+\begin{verbatim}
+> hist(vals$x2,freq=F,main="Histogram (Density Based)",xlab="Values of x2",breaks=10)
+> y2<-exp(-(vals$x2-5)^2/(2*1.5*1.5))/(1.5 * sqrt(2*pi))
+> lines(sort(vals$x2),y2[order(vals$x2)],col="red")
+> lines(density(vals$x2),col="blue")
+\end{verbatim}
+		\begin{figure}[H]
+			\begin{center}
+				\includegraphics[scale=.5]{resources/histogram_q3_2.png}
+				\caption{The Histogram for values of x2}
+			\end{center}
+		\end{figure}
+
+		\item
+		Create a quantile-quantile plot (commonly called a QQ plot) for each variable. The purpose of a QQ plot is to visually match an observed distribution to a theoretical one. In the previous question, it was suggested that the data came from a normal distribution. If this is true, when we plot the quantiles of our data against the quantiles of a normal distribution, it should form a straight line. Construct your plot using \texttt{qqnorm()} in R and \texttt{qqplot()} in Matlab. Include in your plot a line indicating perfect agreement, i.e. y = x. \\
+
+
+\begin{verbatim}
+> qqnorm(vals$x1,main="QQ Plot for values of x1")
+> qqline(vals$x1,col="red",lwd=2)
+\end{verbatim}
+		\begin{figure}[H]
+			\begin{center}
+				\includegraphics[scale=.5]{resources/qqplot_1.png}
+				\caption{The QQ Plot for values of x1}
+			\end{center}
+		\end{figure}
+
+		It is obvious from the following figure that the values of x2 do not form a normal distribution.
+\begin{verbatim}
+> qqnorm(vals$x2,main="QQ Plot for values of x2")
+> qqline(vals$x2,col="red",lwd=2)
+\end{verbatim}
+		\begin{figure}[H]
+			\begin{center}
+				\includegraphics[scale=.5]{resources/qqplot_2.png}
+				\caption{The QQ Plot for values of x2}
+			\end{center}
+		\end{figure}
+
+		\item
+		Comment briefly on what you have learned about each variable. Include comparisons between x1 and x2 using location measures (mean, median, etc.), spread measures (standard deviation), and the shape of the histograms. Qualitatively, does either variable appear to have come from a normal distribution? Why? \\
+
+		From the observations done above one can easily conclude that x1 seems to be from a normal distribution while x2 is not. \\
+
+		Let us look at why x1 could be from a normal distribution \\
+		\begin{itemize}
+			\item
+			It is symmetric around $x=\mu$ and this can be verified with the help of the histogram.
+
+			\item
+			The curve and the hsitogram can show that it is unimodal and reaches a maxima at only $x=\mu$
+
+			\item
+			The QQ plot seems to come up with a roughly linear graph with all the pints roughly falling on the line $y=4.4x +5$. This means the distribution is probably normal
+		\end{itemize}
+
+		x2 doesnt seem to be normal and the following reasons 
+		\begin{itemize}
+			\item
+			The QQ plot odesnt form a straight line
+
+			\item
+			The PDF is not unimodal and there are two maxima neither of which are at $\mu$
+		\end{itemize}
+	\end{enumerate}
 \end{document}		
