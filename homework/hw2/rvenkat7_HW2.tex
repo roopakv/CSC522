@@ -72,8 +72,8 @@
 				\item
 				Calculate sum of the 2nd row, the diagonal and the 3rd column in the matrix. \\
 				\textbf{Ans:} \\
-				x[2,] + x[,3] + diag(x) \\
-				$\implies$  [1] 10 18 26 \\
+				sum(x[2,] + x[,3] + diag(x)) \\
+				$\implies$  [1] 54 \\
 
 				\item
 				Identify row and column dimensions of the matrix.\\
@@ -159,7 +159,9 @@ function checksqmatrix(mat)
   				\item
   				Identity of a matrix. \\
   				\textbf{Ans:} \\
-
+  				\begin{verbatim}
+> x %*% solve(x)
+  				\end{verbatim}
   				\item
   				Sum of all elements in the matrix (use a for/while loop) \\
 \begin{verbatim}
@@ -188,17 +190,10 @@ matrixsum <- function (mat) {
 		Load the file
 		\textbf{Ans:} \\
 		$\implies$
-		vals = read.table("D:
-		\textbackslash\textbackslash
-		Courses
-		\textbackslash\textbackslash
-		datamining - CSC522
-		\textbackslash\textbackslash
-		homework
-		\textbackslash\textbackslash
-		hw2
-		\textbackslash\textbackslash
-		values.txt")
+		\begin{verbatim}
+		> vals = read.table("D:\\Courses\\datamining - CSC522\\homework\\hw2\\values.txt")
+		\end{verbatim}
+		
 
 		\item
 		Make a 2-D plot and label the axes \\
@@ -212,12 +207,13 @@ matrixsum <- function (mat) {
 
 		\item
 		Find the correlation between the dimensions. \\
-		cor(vals) \\
-		$\begin{array}{ccc}
-			~		&		V1			&	V2			\\
-			V1 		&		1.0000000	&	0.9628654	\\
-			V2		&		0.9628654	&	1.0000000	\\
-		\end{array}$
+		
+\begin{verbatim}
+> round(cor(vals3),3)
+      V1    V2
+V1 1.000 0.963
+V2 0.963 1.000
+\end{verbatim}
 
 		\item
 		Now consider a point (5; 1:5).
@@ -629,6 +625,7 @@ rdist(vals,matrix(c(5,1.5),1,2))
 [1] 5.032
 > round(mean(vals$x2),digits=3)
 [1] 4.774
+
 \end{verbatim}
 
 			\item
@@ -638,6 +635,7 @@ rdist(vals,matrix(c(5,1.5),1,2))
 [1] 5.052
 > round(median(vals$x2),digits=3)
 [1] 2.567
+
 \end{verbatim}
 
 			\item
@@ -647,6 +645,7 @@ rdist(vals,matrix(c(5,1.5),1,2))
 [1] 1.464
 > round(sd(vals$x2),digits=3)
 [1] 5.242
+
 \end{verbatim}
 
 			\item
@@ -656,6 +655,7 @@ rdist(vals,matrix(c(5,1.5),1,2))
 [1] -0.123  9.701
 > round(range(vals$x2),digits=3)
 [1] -4.291 15.531
+
 \end{verbatim}
 
 		\end{itemize}
@@ -669,6 +669,7 @@ rdist(vals,matrix(c(5,1.5),1,2))
 > round(quantile(vals$x2),digits=3)
     0%    25%    50%    75%   100% 
 -4.291 -0.132  2.567  9.957 15.531 
+
 \end{verbatim}
 		
 		\item
@@ -747,7 +748,7 @@ rdist(vals,matrix(c(5,1.5),1,2))
 			\item
 			The QQ plot seems to come up with a roughly linear graph with all the pints roughly falling on the line $y=4.4x +5$. This means the distribution is probably normal
 		\end{itemize}
-
+		.\
 		x2 doesnt seem to be normal and the following reasons 
 		\begin{itemize}
 			\item
@@ -756,5 +757,108 @@ rdist(vals,matrix(c(5,1.5),1,2))
 			\item
 			The PDF is not unimodal and there are two maxima neither of which are at $\mu$
 		\end{itemize}
+
+
+	\end{enumerate}
+	
+	\section{Question 4}
+	For this exercise, you will use the Auto MPG Data Set from the UCI Repository (\url{http://archive.ics.uci.edu/ml/datasets/Auto+MPG}). Download the “auto-mpg.data” dataset. DO NOT use “auto-mpg.data-original”. Once you have downloaded the data, perform the following tasks.
+	\begin{enumerate}
+		\item
+		Load the dataset \\
+		\begin{verbatim}
+> vals<-read.table(file.choose())
+> names(vals)<- c("mpg","cylinders","displacement","horsepower",
++ "weight","acceleration","model_yr","origin","car_name")
+		\end{verbatim}
+
+		\item
+		Display the first 10 rows of the dataset
+
+\begin{verbatim}
+> head(vals,10)
+\end{verbatim}
+\resizebox{1\textwidth}{!}{
+$\begin{array}{ccccccccc}
+mpg & cylinders & displacement & horsepower & weight & acceleration & model\_yr & origin & car\_name\\ \relax
+18 & 8 &  307 & 130.0 & 3504 & 12.0 &  70 & 1 & chevrolet chevelle malibu \\ \relax
+15 & 8 &  350 & 165.0 & 3693 & 11.5 &  70 & 1 & buick skylark 320 \\ \relax
+18 & 8 &  318 & 150.0 & 3436 & 11.0 &  70 & 1 & plymouth satellite \\ \relax
+16 & 8 &  304 & 150.0 & 3433 & 12.0 &  70 & 1 & amc rebel sst \\ \relax
+17 & 8 &  302 & 140.0 & 3449 & 10.5 &  70 & 1 & ford torino \\ \relax
+15 & 8 &  429 & 198.0 & 4341 & 10.0 &  70 & 1 & ford galaxie 500 \\ \relax
+14 & 8 &  454 & 220.0 & 4354 &  9.0 &  70 & 1 & chevrolet impala \\ \relax
+14 & 8 &  440 & 215.0 & 4312 &  8.5 &  70 & 1 & plymouth fury iii \\ \relax
+14 & 8 &  455 & 225.0 & 4425 & 10.0 &  70 & 1 & pontiac catalina \\ \relax
+15 & 8 &  390 & 190.0 & 3850 &  8.5 &  70 & 1 & amc ambassador dpl \\ \relax
+\end{array}$
+}
+   
+
+
+		
+		\item
+		Let us assume that the dataset is being used for a regression task to predict the MPG (miles per gallon) using \texttt{x = \{Displacement,Horsepower,Weight, Acceleration\}} \\
+		\begin{enumerate}
+			\item
+			The following linear model was determined empirically to estimate MPG: \\
+			MPGEst = $w_0 + \sum_{i=1}^{n}(w_{i}x_{i})$ \\
+			where $w_{0} = 45:5455$ and $w = \{0.0177,0.037,0.0037,0.2941\}$ \\
+			Using the linear model, compute MPGEst for the entire dataset. \\
+\begin{verbatim}
+> vals2<- vals[complete.cases(vals),]
+> mpgest <- w0 + ((w[1]*vals2$displacement) + 
++ (w[2]*as.numeric(vals2$horsepower)) + 
++ (w[3]*vals2$weight) + (w[4]*vals2$acceleration))
+\end{verbatim}
+			
+			\item
+			The dataset contains the true value of MPG for each car and the linear model above enabled you to estimate the MPG for each car. Is the MPGEst correct? If not, report the Root Mean Squared Error (RMSE). \\
+			\begin{equation}
+				RMSE = \sqrt{\frac{\sum_{i=0}^{n}(y_{i} - \hat{y_{i}})^2}{n}}
+			\end{equation}
+			where, y corresponds to MPG given in the dataset and $\hat{y}$ corresponds to MPGEst that you computed previously. \\
+\begin{verbatim}
+> rmse <- sqrt(((vals2$mpg-mpgest)^2)/nrow(vals2))
+\end{verbatim}
+		\end{enumerate}
+
+		\item
+		We would like to visualize how MPG varies with Acceleration and Displacement. Show the result of the following: \\
+
+		\begin{enumerate}
+			\item
+			Display a 3-D scatter plot of Acceleration, Horsepower and MPG. Label the axes. \\
+\begin{verbatim}
+> scatterplot3d(vals2$acceleration,vals2$horsepower,
++ vals2$mpg,xlab="Acceleration",ylab="Horsepower",zlab="Horse power")
+\end{verbatim}
+			\begin{figure}[H]
+				\begin{center}
+					\includegraphics[scale=.5]{resources/scatter3d.png}
+					\caption{The Scatter 3D Plot}
+				\end{center}
+			\end{figure}
+
+			\item
+			In the same 3-D scatter plot, visualize how both MPG and MPGEst vary with reference to Acceleration and Horsepower. Label the axes. Make sure that MPG and MPGEst are displayed in different colors. Show a legend.
+\begin{verbatim}
+> pl2<-scatterplot3d(vals2$acceleration,vals2$horsepower,
++ vals2$mpg,xlab="Acceleration",ylab="Horsepower",
++ zlab="MPG",zlim=c(0,100))
+> pl2$points3d(vals2$acceleration,vals2$horsepower,
++ mpgest,col="red")
+> legend("topleft", inset=.05, bty="n", cex=0.8, 
++ title="MPG types",  c("MPG Actual", "MPG Estimated"), 
++ fill=c("black", "red"))
+\end{verbatim}
+			
+			\begin{figure}[H]
+				\begin{center}
+					\includegraphics[scale=.5]{resources/plot3d.png}
+					\caption{The 3D Plot with estimated mpg}
+				\end{center}
+			\end{figure}
+		\end{enumerate}
 	\end{enumerate}
 \end{document}		
