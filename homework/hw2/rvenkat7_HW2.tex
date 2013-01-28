@@ -808,7 +808,7 @@ mpg & cylinders & displacement & horsepower & weight & acceleration & model\_yr 
 \begin{verbatim}
 > vals2<- vals[complete.cases(vals),]
 > mpgest <- w0 + ((w[1]*vals2$displacement) + 
-+ (w[2]*as.numeric(vals2$horsepower)) + 
++ (w[2]*paste(as.numeric(vals2$horsepower))) + 
 + (w[3]*vals2$weight) + (w[4]*vals2$acceleration))
 \end{verbatim}
 			
@@ -819,7 +819,9 @@ mpg & cylinders & displacement & horsepower & weight & acceleration & model\_yr 
 			\end{equation}
 			where, y corresponds to MPG given in the dataset and $\hat{y}$ corresponds to MPGEst that you computed previously. \\
 \begin{verbatim}
-> rmse <- sqrt(((vals2$mpg-mpgest)^2)/nrow(vals2))
+> > rmse<-sqrt(sum((vals2$mpg-mpgest)^2)/nrow(vals2))
+> rmse
+[1] 4.407523
 \end{verbatim}
 		\end{enumerate}
 
@@ -830,7 +832,7 @@ mpg & cylinders & displacement & horsepower & weight & acceleration & model\_yr 
 			\item
 			Display a 3-D scatter plot of Acceleration, Horsepower and MPG. Label the axes. \\
 \begin{verbatim}
-> scatterplot3d(vals2$acceleration,vals2$horsepower,
+> scatterplot3d(vals2$acceleration,as.numeric(paste(vals2$horsepower)),
 + vals2$mpg,xlab="Acceleration",ylab="Horsepower",zlab="Horse power")
 \end{verbatim}
 			\begin{figure}[H]
@@ -843,11 +845,11 @@ mpg & cylinders & displacement & horsepower & weight & acceleration & model\_yr 
 			\item
 			In the same 3-D scatter plot, visualize how both MPG and MPGEst vary with reference to Acceleration and Horsepower. Label the axes. Make sure that MPG and MPGEst are displayed in different colors. Show a legend.
 \begin{verbatim}
-> pl2<-scatterplot3d(vals2$acceleration,vals2$horsepower,
+> pl2<-scatterplot3d(vals2$acceleration,as.numeric(paste(vals2$horsepower),
 + vals2$mpg,xlab="Acceleration",ylab="Horsepower",
 + zlab="MPG",zlim=c(0,100))
-> pl2$points3d(vals2$acceleration,vals2$horsepower,
-+ mpgest,col="red")
+> pl2$points3d(vals2$acceleration,
++ as.numeric(paste(vals2$horsepower)),mpgest,col="red")
 > legend("topleft", inset=.05, bty="n", cex=0.8, 
 + title="MPG types",  c("MPG Actual", "MPG Estimated"), 
 + fill=c("black", "red"))
