@@ -287,5 +287,83 @@ tear-prod-rate = reduced: none
 					\caption{Decision Tree - GINI index}
 				\end{center}
 			\end{figure}
+
+			\item
+			Compute the tree using ID3 entropy computations. Show all necessary calculations.
+
+			The entropy of the entire system is calculated as $-\frac{9}{16}log_{2}(\frac{9}{16}) - \frac{9}{16}log_{2}(\frac{9}{16})$ which comes out to be 0.988
 		\end{enumerate}
+
+	\section{Question 3}
+		Classifiers such as decision trees, neural networks, naive bayes, and many others estimate the conditional probability of class membership. For standard two-class classification problems, the goal is to create a decision procedure that minimizes some notion of prediction error. There are many metrics that measure this, but the ‘naive’ optimal decision for all metrics in this case is:\\
+		\[ \hat{y} =    \left\{
+                  \begin{array}{ll}
+                        1 & : P(y=1|X) > 0.5 \\
+                        0 & : P(y=1|X) \leq 0.5 \\
+                  \end{array} 
+                  \right. \]
+
+        where, $\hat{y}$ is the predicted class, `0' or `1', and P(y = 1|X) is the estimated probability of class membership providedby the classifier.
+
+        This is just a technical way of saying that we will predict the most likely class. This is the optimal rule if the cost of making any decision is the same or if the cost function is ``symmetric''. In this problem we will investigate what happens if the cost function is not symmetric. In a non-symmetric cost function, the penalty associated with misclassification can be different for false negative and false positive predictions, depending on the domain. Pretend you have been approached by a large credit card company. They would like for you to help improve their current fraud detection scheme. They have a wealth of data on consumer transactions that they have used to develop a fraud classifier. This classifier takes as input data on the customer requesting the transaction and the specifics of the transaction such as time, location, and many other details. The classifier outputs an estimated probability that the transaction is fraudulent.
+
+        However, for the credit card company the cost of every decision is not the same. These costs are summarized in Table 2 below. If the transaction is fraudulent and is not caught, the credit card company loses the entire transaction amount. Similarly, if the company decides to decline a transaction because they think it is fraudulent but it is not, the customer may be upset and close their account or use it less in the future, costing the credit card company money.
+
+        \begin{table}[H]
+			\centering
+		    \begin{tabular}{|c|c|c|c|}
+	                          \hline
+			        ~  & Prediction        & Truth                  & Cost                         \\ \hline
+			        1. & Predict No Fraud  & Transaction Fraudulant & Transaction Amount ($T_{i}$) \\ 
+			        2. & Predict Fraud     & Transaction Legitimate & $10 + 0.05 * T_{i}$          \\ 
+			        3. & Fraud or No Fraud & Correct                & 0                            \\ 
+	                          \hline
+	                      \end{tabular}
+	        \caption{Cost of Classification}
+		\end{table}
+
+		Using this setup, you will be asked to derive the optimal decision rule and compare it to the naive rule. Download the file \texttt{fraud\_probs.csv}. This file contains information on 152880 transactions. The 3 columns are the transaction amount, the estimated probability of fraud from the classifier, and whether or not the transaction was later reported to be fraudulent. A `1' in the 3rd columns means there was fraud while a `0' means there was none.
+
+		\begin{enumerate}
+			\item
+			Compute the cost of `doing nothing', i.e. always predicting `0', or predicting ``No Fraud'' using the cost matrix given above.
+
+			The cost of doing nothing and predicting 0 all the time is the cost for all transactions where we predicted no fraud but there was a fraud. Which from the table given aboe is the cost fo the transaction. Thus if we find the sum of the trasactions where there was a fraud we have found the cost of predicting ``No Fraud'' all the time.
+
+\begin{verbatim}
+> fraud <- read.csv(file.choose())
+> sum(fraud$Transaction_Amount[which(fraud$Fraud==1)])
+[1] 311347.1
+\end{verbatim}
+			
+			\item
+			Calculate the cost of using the naive rule, i.e. predicting `1' when the probability of fraud is \texttt{> 0.5}.
+
+\begin{verbatim}
+> fraud$pred <- ifelse(fraud$Probability>.5,1,0)
+> fraud$sub <-fraud$Fraud - fraud$pred
+> fraud$cost <- ifelse(fraud$sub==1,fraud$Transaction_Amount,ifelse(fraud$sub==-1,(10 + (.05*fraud$Transaction_Amount)),0))
+> sum(fraud$cost)
+[1] 158855.2
+\end{verbatim}
+			\textbf{Cost of Naive rule : 158855.2}
+
+			\item
+			Calculate the average False Positive cost and the average False Negative cost. To compute the average false positive cost, compute what the cost would be if you made a false positive mistake for every transaction in the data set and then take the average. Repeat this procedure to determine the average false negative cost.
+
+			\textbf{Average False Positive}
+\begin{verbatim}
+> fraud$cost <-ifelse(fraud$Fraud==0,10+(.05*fraud$Transaction_Amount),0)
+> mean(fraud$cost[which(fraud$cost!=0)])
+[1] 14.49366
+\end{verbatim}
+
+			\textbf{Avergae False Negative}
+\begin{verbatim}
+> fraud$cost <-ifelse(fraud$Fraud==1,fraud$Transaction_Amount,0)
+> mean(fraud$cost[which(fraud$cost!=0)])
+[1] 215.9134
+\end{verbatim}
+		\end{enumerate}
+		
 \end{document}
