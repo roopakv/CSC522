@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.9.8)  5 FEB 2013 01:13
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2012.9.8)  7 FEB 2013 23:20
 entering extended mode
 **rvenkat7_HW3.tex
 ("D:\Courses\data_mining - CSC522\homework\hw3\rvenkat7_HW3.tex"
@@ -967,25 +967,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 242--244
 
  []
 
-[4] <resources/q2_img1.png, id=46, 636.12656pt x 426.84468pt>
+[4] <resources/q2_img1.png, id=50, 848.16875pt x 561.09625pt>
 File: resources/q2_img1.png Graphic file (type png)
 
 <use resources/q2_img1.png>
 Package pdftex.def Info: resources/q2_img1.png used on input line 286.
-(pdftex.def)             Requested size: 452.96796pt x 303.94112pt.
+(pdftex.def)             Requested size: 452.96796pt x 299.65698pt.
 
 Underfull \hbox (badness 10000) in paragraph at lines 283--289
-
- []
-
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ˜ in font cmr10!
-Missing character: There is no â in font cmr10!
-Missing character: There is no € in font cmr10!
-Missing character: There is no ™ in font cmr10!
-
-Underfull \hbox (badness 10000) in paragraph at lines 293--294
 
  []
 
@@ -994,9 +983,41 @@ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.294 		\[
-           \hat{y} =    \left\{ <D:/Courses/data_mining - CSC522/homework/hw3/r
-esources/q2_img1.png>]
+l.295 
+       <D:/Courses/data_mining - CSC522/homework/hw3/resources/q2_img1.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 343--345
+
+ []
+
+[6] [7]
+File: resources/q2_img1.png Graphic file (type png)
+ <use resources/q2_img1.png>
+Package pdftex.def Info: resources/q2_img1.png used on input line 443.
+(pdftex.def)             Requested size: 452.96796pt x 299.65698pt.
+ [8pdfTeX warning (ext4): destination with the same identifier (name{figure.2})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.456 		T
+         he confusion Matrix we get is below.]
+<resources/q2_conf.png, id=73, 217.5628pt x 84.315pt>
+File: resources/q2_conf.png Graphic file (type png)
+
+<use resources/q2_conf.png>
+Package pdftex.def Info: resources/q2_conf.png used on input line 459.
+(pdftex.def)             Requested size: 217.56227pt x 84.31477pt.
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ˜ in font cmr10!
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+
+Underfull \hbox (badness 10000) in paragraph at lines 481--482
+
+ []
+
 Missing character: There is no Â in font cmr10!
 Missing character: There is no   in font cmr10!
 Missing character: There is no Â in font cmr10!
@@ -1279,38 +1300,44 @@ Missing character: There is no Â in font cmr10!
 Missing character: There is no   in font cmr10!
 Missing character: There is no Â in font cmr10!
 Missing character: There is no   in font cmr10!
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 322.
- [6pdfTeX warning (ext4): destination with the same identifier (name{table.2}) 
+[9pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.322 \end{document}
-                    ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 322.
+l.512 			C
+          ompute the cost of `doing nothing', i.e. always predicting `0', or...
+pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has
+ been already used, duplicate ignored
 
-("D:\Courses\data_mining - CSC522\homework\hw3\rvenkat7_HW3.aux")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 322.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 322.
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.512 			C
+          ompute the cost of `doing nothing', i.e. always predicting `0', or...
+ <D:/Courses/data_mining - CSC522/homework/hw3/resources/q2_conf.png>]
+Missing character: There is no â in font cmr10!
+Missing character: There is no € in font cmr10!
+Missing character: There is no ™ in font cmr10!
+ [10]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 593.
 
-
-Package rerunfilecheck Warning: File `rvenkat7_HW3.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `rvenkat7_HW3.out':
-(rerunfilecheck)             Before: 0D238B94B7D65C2A3194A616F093A372;92
-(rerunfilecheck)             After:  1F758E24D26E724854C8FB56EC7CA7E8;138.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 322.
+[11]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 593.
+ ("D:\Courses\data_mining - CSC522\homework\hw3\rvenkat7_HW3.aux")
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 593.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 593.
+Package rerunfilecheck Info: File `rvenkat7_HW3.out' has not changed.
+(rerunfilecheck)             Checksum: 1F758E24D26E724854C8FB56EC7CA7E8;138.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 593.
  ) 
 Here is how much of TeX's memory you used:
- 7911 strings out of 494045
- 117383 string characters out of 3148385
- 237765 words of memory out of 3000000
- 11104 multiletter control sequences out of 15000+200000
+ 7934 strings out of 494045
+ 117626 string characters out of 3148385
+ 237766 words of memory out of 3000000
+ 11110 multiletter control sequences out of 15000+200000
  8841 words of font info for 35 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 38i,9n,72p,979b,577s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,9n,72p,979b,583s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.pfb><C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Program Fi
 les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Program Files/MiKT
@@ -1320,9 +1347,9 @@ nts/type1/public/amsfonts/cm/cmr10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
 msfonts/cm/cmr7.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 /cmssbx10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy1
 0.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on rvenkat7_HW3.pdf (6 pages, 181747 bytes).
+Output written on rvenkat7_HW3.pdf (11 pages, 198860 bytes).
 PDF statistics:
- 96 PDF objects out of 1000 (max. 8388607)
- 17 named destinations out of 1000 (max. 500000)
- 22 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 136 PDF objects out of 1000 (max. 8388607)
+ 33 named destinations out of 1000 (max. 500000)
+ 35 words of extra memory for PDF output out of 10000 (max. 10000000)
 

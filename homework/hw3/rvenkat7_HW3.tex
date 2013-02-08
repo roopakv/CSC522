@@ -291,7 +291,190 @@ tear-prod-rate = reduced: none
 			\item
 			Compute the tree using ID3 entropy computations. Show all necessary calculations.
 
-			The entropy of the entire system is calculated as $-\frac{9}{16}log_{2}(\frac{9}{16}) - \frac{9}{16}log_{2}(\frac{9}{16})$ which comes out to be 0.988
+			The entropy of the entire system is calculated as $-\frac{9}{16}log_{2}(\frac{9}{16}) - \frac{9}{16}log_{2}(\frac{9}{16})$ which comes out to be 0.988. Note however since we are lookig for relative entropy to choose attributes we could assume system=1 and still pick the correct atrribute.
+
+			The following Code finds the entropy of the input.
+\begin{verbatim}
+> findentropy <- function (vals, inflated,ent_parent) {
++   
++   
++   unq <- unique(vals)
++   gini <- c()
++   df <- data.frame(v=vals,inf=inflated)
++   entropy_final<-0
++   for(i in 1:length(unq))
++   {
++     no_type_i <- length(vals[which(vals==unq[i])])
++     no_true <- length(which(inflated[which(vals==unq[i])]))
++     no_false <- no_type_i - no_true
++     if(no_true!=0 && no_false!=0)
++     {
++       tmp =  -(no_true/no_type_i)*log2(no_true/no_type_i) -
++ (no_false/no_type_i)*log2(no_false/no_type_i)
++     }
++     else if(no_true==0)
++     {
++       tmp = -(no_false/no_type_i)*log2(no_false/no_type_i)
++     }
++     else
++     {
++       tmp = -(no_true/no_type_i)*log2(no_true/no_type_i)
++     }
++     tlength <-length(vals)
++     entropy_final<-entropy_final + ((no_type_i/tlength)*tmp)
++   }
++   entf<- ent_parent-entropy_final
++   print(paste("The Entropy is ",entf))
++   
++   
++ }
+> findentropy(vals$color,vals$inflated,.988)
+[1] "The Entropy is  0.105143936307951"
+> findentropy(vals$siz,vals$inflated,.988)
+[1] "The Entropy is  0.105143936307951"
+> findentropy(vals$size,vals$inflated,.988)
+[1] "The Entropy is  0.105143936307951"
+> findentropy(vals$act,vals$inflated,.988)
+[1] "The Entropy is  0.105143936307951"
+> findentropy(vals$age,vals$inflated,.988)
+[1] "The Entropy is  0.105143936307951"
+\end{verbatim}
+
+		Since they are all similar We choose, color and proceed. \\
+		The entropy of the system on the yellow side is 0.95 \\
+\begin{verbatim}
+> findentropy(vals$size[which(vals$color=="YELLOW")],
++ vals$inflated[which(vals$color=="YELLOW")],.95)
+[1] "The Entropy is  0.544360937770433"
+> findentropy(vals$act[which(vals$color=="YELLOW")],
++ vals$inflated[which(vals$color=="YELLOW")],.95)
+[1] "The Entropy is  0.0443609377704335"
+> findentropy(vals$age[which(vals$color=="YELLOW")],
++ vals$inflated[which(vals$color=="YELLOW")],.95)
+[1] "The Entropy is  0.0443609377704335"
+\end{verbatim}
+		
+		Given the entropy values we pick size and go on.
+		We may also note that we can consider the entropy of the system to be 1 for all nodes while splitting as we only try and find the relative value.
+\begin{verbatim}
+> findentropy(vals$act[intersect(which(vals$color=="YELLOW"),
++ which(vals$size=="SMALL"))],
++ vals$inflated[intersect(which(vals$color=="YELLOW"),
++ which(vals$size=="SMALL"))],1)
+[1] "The Entropy is  1"
+> findentropy(vals$act[intersect(which(vals$color=="YELLOW"),
++ which(vals$size=="LARGE"))],
++ vals$inflated[intersect(which(vals$color=="YELLOW"),
++ which(vals$size=="LARGE"))],1)
+[1] "The Entropy is  0.5"
+> findentropy(vals$age[intersect(which(vals$color=="YELLOW"),
++ which(vals$size=="LARGE"))],
++ vals$inflated[intersect(which(vals$color=="YELLOW"),
++ which(vals$size=="LARGE"))],1)
+[1] "The Entropy is  0.5"
+\end{verbatim}
+		Now we see that the data for Yellow and small is classified, however we know have to pick etween act and age both which have the same entropy. Let us pick act and move on.
+
+\begin{verbatim}
+> findentropy(vals$age[intersect(intersect(which(vals$color=="YELLOW"),
++ which(vals$size=="LARGE")),which(vals$act=="DIP"))],
++ vals$inflated[intersect(intersect(which(vals$color=="YELLOW"),
++ which(vals$size=="LARGE")),which(vals$act=="DIP"))],1)
+[1] "The Entropy is  1"
+> findentropy(vals$age[intersect(intersect(which(vals$color=="YELLOW"),
++ which(vals$size=="LARGE")),which(vals$act=="STRETCH"))],
++ vals$inflated[intersect(intersect(which(vals$color=="YELLOW"),
++ which(vals$size=="LARGE")),which(vals$act=="STRETCH"))],1)
+[1] "The Entropy is  1"
+> findentropy(vals$act[intersect(intersect(which(vals$color=="YELLOW"),
++ which(vals$size=="LARGE")),which(vals$act=="DIP"))],
++ vals$inflated[intersect(intersect(which(vals$color=="YELLOW"),
++ which(vals$size=="LARGE")),which(vals$act=="DIP"))],1)
+[1] "The Entropy is  1"
+\end{verbatim}
+		From the values we can see that considering  yellow large an stretch the data can be classified further. But since we have only one remaining attribute  we have constructed this part of the tree.
+
+Now moving to the other part of the tree.
+
+\begin{verbatim}
+> findentropy(vals$size[which(vals$color=="PURPLE")],
++ vals$inflated[which(vals$color=="PURPLE")],1)
+[1] "The Entropy is  0.188721875540867"
+> findentropy(vals$act[which(vals$color=="PURPLE")],
++ vals$inflated[which(vals$color=="PURPLE")],1)
+[1] "The Entropy is  0.5"
+> findentropy(vals$age[which(vals$color=="PURPLE")],
++ vals$inflated[which(vals$color=="PURPLE")],1)
+[1] "The Entropy is  0.5"
+\end{verbatim}
+		We pick act and now try and move on.
+
+\begin{verbatim}	
+> findentropy(vals$size[intersect(which(vals$color=="PURPLE"),
++ which(vals$act=="DIP"))],
++ vals$inflated[intersect(which(vals$color=="PURPLE"),
++ which(vals$act=="DIP"))],1)
+[1] "The Entropy is  1"
+> findentropy(vals$age[intersect(which(vals$color=="PURPLE"),
++ which(vals$act=="DIP"))],
++ vals$inflated[intersect(which(vals$color=="PURPLE"),
++ which(vals$act=="DIP"))],1)
+[1] "The Entropy is  1"
+\end{verbatim}
+		This means that we have to work with stretch as dip is classifed
+
+		Using the data we can see that choosing age with stretch we can classify the remaingin data.
+\begin{verbatim}
+> findentropy(vals$size[intersect(which(vals$color=="PURPLE"),
++ which(vals$act=="STRETCH"))],
++ vals$inflated[intersect(which(vals$color=="PURPLE"),
++ which(vals$act=="STRETCH"))],1)
+[1] "The Entropy is  0"
+> findentropy(vals$age[intersect(which(vals$color=="PURPLE"),
++ which(vals$act=="STRETCH"))],
++ vals$inflated[intersect(which(vals$color=="PURPLE"),
++ which(vals$act=="STRETCH"))],1)
+[1] "The Entropy is  1"
+\end{verbatim}
+		
+		The tree we have obtained is depicted as follows.
+		\begin{figure}[H]
+			\begin{center}
+				\includegraphics[width=\textwidth]{resources/q2_img1.png}
+				\caption{Decision Tree - ID3 Algorithm}
+			\end{center}
+		\end{figure}
+
+		\item
+		Are the trees different? Why? If the trees are different, state which tree is better, and why. Your reasoning must be independent of the test set provided. That is, it must not be along the lines of ``Tree A gives better accuracy on the test set than Tree B''.
+
+		The trees we get from both the algorithms seem to be the same. Since they are the same we cannot say any one of the algorithms is better. However if we have different data sets which give us differnt trees on these algorithms we may be able to compare the trees.
+
+		\item
+		Use yellow-small data set as the test set and compute the confusion matrix in each case. If the trees are the same, one confusion matrix is enough, of course.
+
+		The confusion Matrix we get is below.
+		\begin{figure}[H]
+			\begin{center}
+				\includegraphics[scale=1]{resources/q2_conf.png}
+				\caption{Confusion Matrix}
+			\end{center}
+		\end{figure}
+
+		\begin{itemize}
+			\item
+			True Positive -8
+
+			\item
+			False Positive - 3
+
+			\item
+			True Negative - 9
+
+			\item
+			False Negative - 0
+		\end{itemize}
+
 		\end{enumerate}
 
 	\section{Question 3}
@@ -342,7 +525,8 @@ tear-prod-rate = reduced: none
 \begin{verbatim}
 > fraud$pred <- ifelse(fraud$Probability>.5,1,0)
 > fraud$sub <-fraud$Fraud - fraud$pred
-> fraud$cost <- ifelse(fraud$sub==1,fraud$Transaction_Amount,ifelse(fraud$sub==-1,(10 + (.05*fraud$Transaction_Amount)),0))
+> fraud$cost <- ifelse(fraud$sub==1,fraud$Transaction_Amount,
++ ifelse(fraud$sub==-1,(10 + (.05*fraud$Transaction_Amount)),0))
 > sum(fraud$cost)
 [1] 158855.2
 \end{verbatim}
@@ -353,17 +537,57 @@ tear-prod-rate = reduced: none
 
 			\textbf{Average False Positive}
 \begin{verbatim}
-> fraud$cost <-ifelse(fraud$Fraud==0,10+(.05*fraud$Transaction_Amount),0)
-> mean(fraud$cost[which(fraud$cost!=0)])
-[1] 14.49366
+> fraud$cost <-10+(.05*fraud$Transaction_Amount)
+> mean(fraud$cost)
+[1] 14.5531
 \end{verbatim}
 
 			\textbf{Avergae False Negative}
 \begin{verbatim}
-> fraud$cost <-ifelse(fraud$Fraud==1,fraud$Transaction_Amount,0)
-> mean(fraud$cost[which(fraud$cost!=0)])
-[1] 215.9134
+> fraud$cost <-fraud$Transaction_Amount
+> mean(fraud$cost)
+[1] 91.06195
 \end{verbatim}
+
+		\item
+		Now let’s see if we can do better than the naive rule. Let us say for a given transaction and an estimate from the classifier that the transaction is fraudulent, pi, we decide to predict fraud and decline the transaction. What is the expected cost of this decision? Expected cost is defined below: 
+		\begin{center}
+			(probability decision is correct)*(cost if you are correct) +(probability decision is wrong)*(cost if you are wrong)
+		\end{center}
+		Please use the established notation in answering this. This should be a function of pi and the costs given in Table 2.
+
+		In this case we have to consider every transaction is a fraud and find the cost.  This is calculated as $10 + .05 \times T_{i}$.
+		Further the probability of wrong decision is $1-P_{i}$ here because $P_{i}$ represents the probability of fraud and thus $1-P_{i}$ would be probability of not fraud.
+
+\begin{verbatim}
+> vals <-read.csv(file.choose())
+> vals$pr_wrong <-1 - vals$Probability
+> vals$cost <-10+(.05*vals$Transaction_Amount)
+> vals$expcost <- vals$pr_wrong * vals$cost
+\end{verbatim}
+
+		\item
+		What if instead we decided to predict that the same transaction was legitimate (i.e. not fraudulent) and accept the transaction. Using the same fraud probability estimate, $P_{i}$, what is the expected cost in this case?
+
+		In this case. We do a similar thing to waht we did for the previous sub division. Except that prediciton is now always 0.
+
+\begin{verbatim}
+> vals$cost2 <-vals$Transaction_Amount
+> vals$expcost2 <- vals$cost2 * vals$Probability
+\end{verbatim}
+
+		\item
+		For every transaction, compute the cost for predicting fraud (1) or no fraud (0) using the expected costs from (4) and (5). For each transaction, predict the class with the lower expected cost. Compute the total cost using this procedure and compare it to the cost of the naive rule in (2).
+
+		Using the data calculated above. We just choose the minimum from each cost and sum it up.
+
+\begin{verbatim}
+> vals$minecost <-mapply(min,vals$expcost,vals$expcost2)
+> sum(vals$minecost)
+[1] 63913.12
+\end{verbatim}
+
+This value seems to be much lower for cost than what we found using the naive rule. This shows that this a better way of prediction. This model is a better model as we try to minize our cost. This is done by comparing both the costs and predicting the answer by the one which has a lower cost.
 		\end{enumerate}
 		
 \end{document}
