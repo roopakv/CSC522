@@ -16,7 +16,7 @@
 \begin{document}
 
 	\title{CSC 522 : Automated Learning and Data Analysis}
-	\subtitle{Homework 2}
+	\subtitle{Homework 3}
 	\author{Roopak Venkatakrishnan - rvenkat7@ncsu.edu}
 	\maketitle
 
@@ -557,7 +557,7 @@ Now moving to the other part of the tree.
 		Please use the established notation in answering this. This should be a function of pi and the costs given in Table 2.
 
 		In this case we have to consider every transaction is a fraud and find the cost.  This is calculated as $10 + .05 \times T_{i}$.
-		Further the probability of wrong decision is $1-P_{i}$ here because $P_{i}$ represents the probability of fraud and thus $1-P_{i}$ would be probability of not fraud.
+		Further the probability of wrong decision is $1-P_{i}$ here because $P_{i}$ represents the probability of fraud.
 
 \begin{verbatim}
 > vals <-read.csv(file.choose())
@@ -569,7 +569,7 @@ Now moving to the other part of the tree.
 		\item
 		What if instead we decided to predict that the same transaction was legitimate (i.e. not fraudulent) and accept the transaction. Using the same fraud probability estimate, $P_{i}$, what is the expected cost in this case?
 
-		In this case. We do a similar thing to waht we did for the previous sub division. Except that prediciton is now always 0.
+		In this case, we always predict legitimate and the probability of being wrong is $P_{i}$.
 
 \begin{verbatim}
 > vals$cost2 <-vals$Transaction_Amount
@@ -587,7 +587,7 @@ Now moving to the other part of the tree.
 [1] 63913.12
 \end{verbatim}
 
-This value seems to be much lower for cost than what we found using the naive rule. This shows that this a better way of prediction. This model is a better model as we try to minize our cost. This is done by comparing both the costs and predicting the answer by the one which has a lower cost.
+This value seems to be much lower for cost than what we found using the naive rule. This shows that this a better way of prediction. This model is a better model as we try to minize our cost.
 		\end{enumerate}
 		
 \end{document}
