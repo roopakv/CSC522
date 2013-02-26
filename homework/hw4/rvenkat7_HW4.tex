@@ -240,8 +240,10 @@ The final value used for the model was cp = 0.0125.
 			Let us start by having a constant interaction depth and a constant shirnkage and only vary the number of trees grown.
 
 \begin{verbatim}
-> gbm_params <- expand.grid(.interaction.depth = 5, .n.trees = c(5,10,15,20,25), .shrinkage = .1)
-> train(Y~.,data=thedata,method="gbm",trControl=cvinfo,tuneGrid=gbm_params)
+> gbm_params <- expand.grid(.interaction.depth = 5,
+> train(Y~.,data=thedata,method="gbm",trControl=cvinfo
++ ,tuneGrid=gbm_params)
++ .n.trees = c(5,10,15,20,25), .shrinkage = .1)
 891 samples
   4 predictors
   2 classes: '0', '1' 
@@ -263,13 +265,15 @@ Resampling results across tuning parameters:
 Tuning parameter 'interaction.depth' was held constant at a value of 5
 Tuning parameter 'shrinkage' was held constant at a value of 0.1
 Accuracy was used to select the optimal model using  the largest value.
-The final values used for the model were interaction.depth = 5, n.trees = 25 and shrinkage = 0.1. 
+The final values used for the model were 
+interaction.depth = 5, n.trees = 25 and shrinkage = 0.1. 
 \end{verbatim}
 
 			We see that Accuracy increases as the number of trees increases. Let us no see if it keeps increasing or it stops at some point.
 
 \begin{verbatim}
-> gbm_params <- expand.grid(.interaction.depth = 5, .n.trees = c(25,50,100,500,1000), .shrinkage = .1)
+> gbm_params <- expand.grid(.interaction.depth = 5,
++ .n.trees = c(25,50,100,500,1000), .shrinkage = .1)
 > train(Y~.,data=thedata,method="gbm",trControl=cvinfo,tuneGrid=gbm_params)
 891 samples
   4 predictors
@@ -292,12 +296,14 @@ Resampling results across tuning parameters:
 Tuning parameter 'interaction.depth' was held constant at a value of 5
 Tuning parameter 'shrinkage' was held constant at a value of 0.1
 Accuracy was used to select the optimal model using  the largest value.
-The final values used for the model were interaction.depth = 5, n.trees = 100 and shrinkage = 0.1. 
+The final values used for the model
+ were interaction.depth = 5, n.trees = 100 and shrinkage = 0.1. 
 \end{verbatim}
 			We see that after a certain point increasing number of trees doesnt give us much use and actually reduces accuracy. Let us consider 100 trees and see what happens when we vary other parameters.
 
 \begin{verbatim}
-> gbm_params <- expand.grid(.interaction.depth = c(1,5,10,25,100), .n.trees = 100, .shrinkage = .1)
+> gbm_params <- expand.grid(.interaction.depth = c(1,5,10,25,100),
++ .n.trees = 100, .shrinkage = .1)
 > train(Y~.,data=thedata,method="gbm",trControl=cvinfo,tuneGrid=gbm_params)
 891 samples
   4 predictors
@@ -320,12 +326,14 @@ Resampling results across tuning parameters:
 Tuning parameter 'n.trees' was held constant at a value of 100
 Tuning parameter 'shrinkage' was held constant at a value of 0.1
 Accuracy was used to select the optimal model using  the largest value.
-The final values used for the model were interaction.depth = 10, n.trees = 100 and shrinkage = 0.1. 
+The final values used for the model were
+ interaction.depth = 10, n.trees = 100 and shrinkage = 0.1. 
 \end{verbatim}
 
 			We can see that increasing the depth eyond a certain point causes the model to fail. We seem to get an optimum value at depth 10. Let us use this and vary shrinkage.
 \begin{verbatim}
-> gbm_params <- expand.grid(.interaction.depth = 10, .n.trees = 100, .shrinkage = c(.01,.1,.5,.75,1))
+> gbm_params <- expand.grid(.interaction.depth = 10,
++ .n.trees = 100, .shrinkage = c(.01,.1,.5,.75,1))
 > train(Y~.,data=thedata,method="gbm",trControl=cvinfo,tuneGrid=gbm_params)
 891 samples
   4 predictors
@@ -348,13 +356,15 @@ Resampling results across tuning parameters:
 Tuning parameter 'interaction.depth' was held constant at a value of 10
 Tuning parameter 'n.trees' was held constant at a value of 100
 Accuracy was used to select the optimal model using  the largest value.
-The final values used for the model were interaction.depth = 10, n.trees = 100 and shrinkage = 0.1. 
+The final values used for the model
+ were interaction.depth = 10, n.trees = 100 and shrinkage = 0.1. 
 \end{verbatim}
 
 			Now we see that a good vlaue of shrinkage is around .1 We try fine tune this a bit with slightly varyig values of number of trees and depth to see if we can get a better accuracy.
 
 \begin{verbatim}
-> gbm_params <- expand.grid(.interaction.depth = c(5,10,15), .n.trees = c(25,50,100), .shrinkage = c(.01,.1,.2))
+> gbm_params <- expand.grid(.interaction.depth = c(5,10,15), 
++ .n.trees = c(25,50,100), .shrinkage = c(.01,.1,.2))
 > treef <- train(Y~.,data=thedata,method="gbm",trControl=cvinfo,tuneGrid=gbm_params)
 > treef
 891 samples
@@ -398,7 +408,8 @@ Resampling results across tuning parameters:
   15                 100      0.2        0.811     0.596  0.0377       0.0796  
 
 Accuracy was used to select the optimal model using  the largest value.
-The final values used for the model were interaction.depth = 15, n.trees = 25 and shrinkage = 0.1. 
+The final values used for the model
+ were interaction.depth = 15, n.trees = 25 and shrinkage = 0.1. 
 \end{verbatim}
 
 \begin{verbatim}
@@ -409,6 +420,193 @@ The final values used for the model were interaction.depth = 15, n.trees = 25 an
 \end{verbatim}
 		Using this model to predict the data and submitting to Kaggle we got an accuracy of 73.468\%
 
+
+		\item
+		Pick two other classiﬁcation algorithms not covered in class and tune them using crossvalidation. For an incomplete list of classiﬁcation algorithms in R, take a look at this page http://caret.r-forge.r-project.org/modelList.html. Compare the performance of the two new models against the decision tree with tuning parameters and boosted tree from the previous trials. State which model performed the best on the basis of CV scores.
+
+		The first method I would be trying is the mda method from the mda package.
+
+\begin{verbatim}
+> mda_params <- expand.grid( .subclasses = c(1,5,10,25,100))
+> train(Y~.,data=thedata,method="mda",trControl=cvinfo,tuneGrid=mda_params)
+891 samples
+  4 predictors
+  2 classes: '0', '1' 
+
+No pre-processing
+Resampling: Cross-Validation (5 fold) 
+
+Summary of sample sizes: 712, 714, 713, 712, 713 
+
+Resampling results across tuning parameters:
+
+  subclasses  Accuracy  Kappa  Accuracy SD  Kappa SD
+  1           0.778     0.526  0.028        0.0577  
+  5           0.784     0.541  0.0256       0.0573  
+  10          0.792     0.56   0.0107       0.026   
+  25          NaN       NaN    NA           NA      
+  100         NaN       NaN    NA           NA      
+
+Accuracy was used to select the optimal model using  the largest value.
+The final value used for the model was subclasses = 10. 
+\end{verbatim}
+			it is noticeable that the beyond some point the subclasses produce no result as we have too many so adjusting this parameter to find a better value to suit the classifier and get more accurate results
+
+\begin{verbatim}
+> mda_params <- expand.grid( .subclasses = c(1,3,5,10,15))
+> treemda <-train(Y~.,data=thedata,method="mda",trControl=cvinfo,tuneGrid=mda_params)
+> treemda
+891 samples
+  4 predictors
+  2 classes: '0', '1' 
+
+No pre-processing
+Resampling: Cross-Validation (5 fold) 
+
+Summary of sample sizes: 712, 713, 713, 714, 712 
+
+Resampling results across tuning parameters:
+
+  subclasses  Accuracy  Kappa  Accuracy SD  Kappa SD
+  1           0.779     0.528  0.0162       0.0317  
+  3           0.781     0.535  0.0265       0.0498  
+  5           0.782     0.536  0.0227       0.0439  
+  10          0.778     0.527  0.0282       0.0573  
+  15          0.775     0.517  0.00795      0.0287  
+
+Accuracy was used to select the optimal model using  the largest value.
+The final value used for the model was subclasses = 5. 
+\end{verbatim}
+			Working with values in and around 5 we can try improve the cross validation scores
+
+\begin{verbatim}
+> mda_params <- expand.grid( .subclasses = c(3,4,5,6,8))
+> treemda <-train(Y~.,data=thedata,method="mda",trControl=cvinfo,tuneGrid=mda_params)
+> treemda
+891 samples
+  4 predictors
+  2 classes: '0', '1' 
+
+No pre-processing
+Resampling: Cross-Validation (5 fold) 
+
+Summary of sample sizes: 712, 713, 713, 713, 713 
+
+Resampling results across tuning parameters:
+
+  subclasses  Accuracy  Kappa  Accuracy SD  Kappa SD
+  3           0.783     0.534  0.0344       0.0774  
+  4           0.781     0.528  0.0393       0.0912  
+  5           0.783     0.537  0.0359       0.0781  
+  6           0.784     0.537  0.0267       0.0597  
+  8           0.776     0.529  0.0464       0.0861  
+
+Accuracy was used to select the optimal model using  the largest value.
+The final value used for the model was subclasses = 6. 
+\end{verbatim}
+
+		Running it again over and over we see that it gives 4 and 6 as an optimum number of subclasses. Let us just use one case and move
+\begin{verbatim}
+> finaltree <- treemda$finalModel
+> mypred <- predict(finaltree, X_test)
+> mpred <- as.numeric(mypred)-1
+> write(mpred,"mda_pred.csv",ncolumns=1)
+\end{verbatim}
+			Submitting the above trainging set in Kaggle I seem to get an accruacy of 75.120\%
+
+		The next method I am going to try is JRip
+
+\begin{verbatim}
+> jrip_params <- expand.grid( .NumOpt = c(1,5,10,25,100))
+> treejrip <-train(Y~.,data=thedata,method="JRip",trControl=cvinfo,tuneGrid=jrip_params)
+> teejrip
+891 samples
+  4 predictors
+  2 classes: '0', '1' 
+
+No pre-processing
+Resampling: Cross-Validation (5 fold) 
+
+Summary of sample sizes: 713, 714, 713, 712, 712 
+
+Resampling results across tuning parameters:
+
+  NumOpt  Accuracy  Kappa  Accuracy SD  Kappa SD
+  1       0.79      0.536  0.0279       0.0642  
+  5       0.791     0.54   0.0255       0.0576  
+  10      0.787     0.53   0.0199       0.0497  
+  25      0.792     0.542  0.0286       0.0715  
+  100     0.787     0.542  0.0203       0.0437  
+
+Accuracy was used to select the optimal model using  the largest value.
+The final value used for the model was NumOpt = 25. 
+\end{verbatim}
+
+			We optimize the set of options to see if we can better the JRip Accuracy
+
+\begin{verbatim}
+> jrip_params <- expand.grid( .NumOpt = c(1,3,5,25,50))
+> treejrip <-train(Y~.,data=thedata,method="JRip",trControl=cvinfo,tuneGrid=jrip_params)
+Warning message:
+In train.default(x, y, weights = w, ...) :
+  At least one of the class levels are not valid R variables names; 
+  This may cause errors if class probabilities are generated because 
+  the variables names will be converted to: X0, X1
+> treejrip
+891 samples
+  4 predictors
+  2 classes: '0', '1' 
+
+No pre-processing
+Resampling: Cross-Validation (5 fold) 
+
+Summary of sample sizes: 714, 712, 712, 713, 713 
+
+Resampling results across tuning parameters:
+
+  NumOpt  Accuracy  Kappa  Accuracy SD  Kappa SD
+  1       0.789     0.535  0.0216       0.0431  
+  3       0.791     0.539  0.0236       0.0475  
+  5       0.796     0.556  0.0403       0.083   
+  25      0.794     0.552  0.0312       0.0707  
+  50      0.787     0.542  0.0348       0.0756  
+
+Accuracy was used to select the optimal model using  the largest value.
+The final value used for the model was NumOpt = 5. 
+\end{verbatim}
+			Trying different value of NumOpt we can try and optimize the accuracy.
+
+			When running the algorithm over and over we can see that 5 seems to have bes accuracy.
+
+\begin{verbatim}
+> jrip_params <- expand.grid( .NumOpt = c(1,3,5,15,25))
+> treejrip <-train(Y~.,data=thedata,method="JRip",trControl=cvinfo,tuneGrid=jrip_params)
+> treejrip
+891 samples
+  4 predictors
+  2 classes: '0', '1' 
+
+No pre-processing
+Resampling: Cross-Validation (5 fold) 
+
+Summary of sample sizes: 713, 713, 712, 713, 713 
+
+Resampling results across tuning parameters:
+
+  NumOpt  Accuracy  Kappa  Accuracy SD  Kappa SD
+  1       0.806     0.572  0.0313       0.0717  
+  3       0.804     0.562  0.0266       0.064   
+  5       0.815     0.585  0.0364       0.0836  
+  15      0.8       0.556  0.0259       0.0605  
+  25      0.797     0.558  0.0343       0.0696  
+
+Accuracy was used to select the optimal model using  the largest value.
+The final value used for the model was NumOpt = 5. 
+\end{verbatim}
+	
+
+	\item
+	Thus by looking at it I would think the gbm module gives us a good amount of accuracy. This can be said because it gives a good amount of accuracy. however we see that the accuracy score from Kaggle doesnt seem to be as good.This is probably becuase of over fitting.
 		\end{enumerate}
 
 
@@ -441,7 +639,7 @@ P(Ca) = 0.2
 \end{verbatim}
 		\textbf{P(Ca) = 0.2}
 		\item
-		P(Ta | Ca) \\
+		P(Ta $\vert$ Ca) \\
 		\begin{equation*}
 			\frac{P(Ta \cap Ca)}{P(Ca)}
 		\end{equation*}
@@ -451,10 +649,10 @@ P(Ca) = 0.2
 		\begin{equation*}
 			\frac{.12}{.2}
 		\end{equation*}
-		\textbf{P(Ta | Ca) = 0.6}
+		\textbf{P(Ta $\vert$ Ca) = 0.6}
 
 		\item
-		P(Ca | Ta $\vee$ Ct)
+		P(Ca $\vert$ Ta $\vee$ Ct)
 		\begin{equation*}
 			\frac{P(Ca \cap (Ta \cup Ct))}{P(Ta \cup Ct)}
 		\end{equation*}
@@ -464,7 +662,7 @@ P(Ca) = 0.2
 		\begin{equation*}
 			\frac{.18}{.416}
 		\end{equation*}
-		\textbf{P(Ca | Ta $\vee$ Ct) = 0.4615}
+		\textbf{P(Ca $\vert$ Ta $\vee$ Ct) = 0.4615}
 	\end{enumerate}
 
 \end{document}
