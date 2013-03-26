@@ -200,4 +200,73 @@ X5 -0.0031247916
 			\end{figure}
 		\end{itemize}
 	\end{enumerate}
+
+	\section{Question 2 [30 Points] - Artiﬁcial Neural Network}
+
+	Consider the dataset Image Segmentation Data Set from the UCI repository \url{http://archive.ics.uci.edu/ml/datasets/Image+Segmentation}. The dataset consists of 19 precomputed attributes of 7 outdoor images, or 7 classes. You are provided with a training set and a test set. 
+
+	Unlike the problems you are seen in the past, which have all been binary classiﬁcation, this problem has seven classes. With Artiﬁcial Neural Network, there are at least 2 ways to construct a multi-class classiﬁer:
+
+	\begin{enumerate}
+		\item
+		Direct approach, where there are 7 output nodes to a neural network
+
+		\item
+		One-vs-All classiﬁcation, where you build one binary classiﬁer per class for each of the 7 classes. When predicting the correct class for a given instance in the test data, we choose the classiﬁer that has the highest conﬁdence.
+
+	\end{enumerate}
+
+	Your task is to build the best possible 7-output ANN and the best possible One-vs-All classiﬁer. You must submit the following:
+
+	\begin{itemize}
+		\item
+		A description of how you built the classiﬁers including the parameters you chose and the reason behind such a choice. The parameters include epoch, momentum, learning rate, number of hidden nodes and any other parameter you think might help.
+
+		\item
+		A descriptive comparison in performance between the 7-output ANN and the One-vs-All ANN - compare the 2 models based on their predictive performance on the given test data, training time, and your judgment of which approach is better for this problem.
+
+		\item
+		Any code you have written (using Matlab, R, Weka’s Java API)
+	\end{itemize}
+
+	\section{Question 3 [10 Points (6 + 4)] - Multi-Class Classiﬁcation}
+
+
+	An electronic nose is a device that can ``sniff'' gases at various locations. One way to construct the devise is using an array of $N$ semiconductors, each of which will have a different voltage response when in contact with certain gases. Each semiconductor responds to at least one gas (i.e., more than one gas). Let us assume that there are 3 gases A, B and C. Some locations can have either one of the gases or a mixture of gases. Thus, possible class labels are: A, B, C, AB, AC, BC, ABC.
+
+	\begin{enumerate}
+		\item
+		If you are allowed to use only an Artiﬁcial Neural Network, which of the following con-ﬁgurations are possible? State why or why not.
+		\begin{itemize}
+			\item
+			1 network with 7 output nodes
+
+			\item
+			One-vs-All
+
+			\item
+			1 network with only 3 output nodes
+		\end{itemize}
+
+		\item
+		Irrespective of your answer for the previous part, for each of the above conﬁgurations, comment on the complexity of the network. Comment on how you would choose the number of hidden nodes, training time and number of epochs for each of the networks.
+
+	\end{enumerate}
+
+	\section{Question 4 [8 Points] - Hyperplanes for Classiﬁcation}
+
+	Consider $N$ points in a D-dimensional space, some of which are positive and some of which are negative. We all know that for $N = 2$ points in $d = 1$ dimensions, a line can separate positive and negative examples. Based on this, state whether a similar linear separator is possible for each of the following cases. If a linear separator is not possible, give an example and state conditions that must be satisﬁed for the existence of a linear classiﬁer. The correct answer to this question considers all possible arrangements of the N points in the D-dimensional space. If a linear separator is not possible for even one such arrangement, your answer should state that case as an example for failure and state the conditions when a linear separator is possible.
+	\begin{itemize}
+		\item
+		N=3, D=2
+
+		\item
+		N=4, D=2
+
+		\item
+		N=4, D=3
+
+		\item
+		N=5, D=3
+	\end{itemize}
 \end{document}
