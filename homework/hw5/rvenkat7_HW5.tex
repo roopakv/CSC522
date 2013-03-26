@@ -89,7 +89,7 @@ X8  -0.0006889951
 X9  -0.0060084271
 X10  0.0112536257
 			\end{lstlisting}
-
+			\textbf{Note:} In the above case $X0$ is the coeffiecient of $\beta$ for the intercept
 			\item
 			Estimate the mean squared error on an unseen test set by performing 5-fold crossvalidation. Recall the MSE for a set of $y$ observations and $\hat{y}$ predictions is deﬁned as
 			\begin{equation*}
@@ -130,6 +130,74 @@ X10  0.0112536257
 > mean(mse)
 [1] 0.04500332
 			\end{lstlisting}
+
+			We get the Mean MSE to be $0.04500332$.
+		\end{itemize}
+
+		\item
+		The term `linear model' indicates that a model is linear with respect to $\beta$. However, we can model higher order polynomial terms by explicity computing them, including them in the $X$ matrix, and then ﬁt a linear model to this matrix. Perform the following tasks:
+
+		\begin{itemize}
+			\item
+			Load \emph{polynomial.train.csv}
+			\begin{verbatim}
+> data <- read.csv(file.choose())
+			\end{verbatim}
+
+			\item
+			Plot $Y$ as a function of $X$
+\begin{verbatim}
+> plot(data[["X"]],data[["Y"]],xlab="X data",ylab="Y data")
+\end{verbatim}
+			
+			\begin{figure}[H]
+				\begin{center}
+					\includegraphics[width=\textwidth]{resources/q1_2_img1.png}
+					\caption{Plot with points}
+				\end{center}
+			\end{figure}
+			\item
+			Create a new $X$ matrix that includes a column of 1s for an intercept, a column for the original $X$ values, and a column of polynomials for each $X^{i}$ for $i \in {2,3,4,5}$. This will create a matrix with dimensions $300 \times 6$.
+			\begin{verbatim}
+> x_data <- cbind(rep(1,300),data["X"],data["X"]^2,data["X"]^3,data["X"]^4,data["X"]^5)
+> names(x_data) <- c("X0","X1","X2","X3","X4","X5")
+			\end{verbatim}
+
+			\item
+			Find the OLS solution to this using $(X^{T}X)^{-1} X^{T}Y$.
+
+\begin{lstlisting}[language=R,frame=single]
+> xt <- t(x_data)
+> xtx <- as.matrix(xt) %*% t(xt)
+> xty <- as.matrix(xt) %*% as.matrix(data["Y"])
+> beta <- solve(xtx) %*% xty
+> beta
+               Y
+X0  2.0142724145
+X1  0.9522479087
+X2  0.5014464975
+X3 -0.2219555459
+X4  0.0001422326
+X5 -0.0031247916
+\end{lstlisting}
+		\textbf{Note:} Here $X0$ is the intercept while $X1,X2,X3,X4,X5$ denote powers of $X$ etc.
+
+		\item
+		Overlay the fitted values (i.e. $X\hat{\beta}_{OLS}$) as a line on the plot of $Y$ vs. $X$.
+		\begin{lstlisting}[language=R,frame=single]
+> xpred <-  mapply("*",t(beta),x_data)
+> y_pred <- rowSums(xpred)
+> pred<- cbind(y_pred,x_data[2])
+> pred_out <- arrange(pred,X1)
+> plot(data[["X"]],data[["Y"]],xlab="X data",ylab="Y data")
+> lines(pred_out$X1,pred_out$y_pred,col="red")
+		\end{lstlisting}
+		\begin{figure}[H]
+				\begin{center}
+					\includegraphics[width=\textwidth]{resources/q1_2_img2.png}
+					\caption{Plot with points and overlaid line}
+				\end{center}
+			\end{figure}
 		\end{itemize}
 	\end{enumerate}
 \end{document}
