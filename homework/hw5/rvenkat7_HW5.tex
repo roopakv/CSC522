@@ -222,6 +222,8 @@ X5 -0.0031247916
 		\item
 		A description of how you built the classiﬁers including the parameters you chose and the reason behind such a choice. The parameters include epoch, momentum, learning rate, number of hidden nodes and any other parameter you think might help.
 
+		I used the multiLayer Perceptronin Weka for the Direct Approach. When trying to find values for the number of hidden nodes, I did a bit fo searching to see what would be th optimum number of nodes to choose and came across this article at \url{ftp://ftp.sas.com/pub/neural/FAQ3.html#A_hu}. After reading it I tried their suggestion of choosing the number of nodes as $( inputs + outputs) * \frac{2}{3}$. Thus the number of hidden nodes was chosen to be 17.
+
 		\item
 		A descriptive comparison in performance between the 7-output ANN and the One-vs-All ANN - compare the 2 models based on their predictive performance on the given test data, training time, and your judgment of which approach is better for this problem.
 
@@ -229,7 +231,7 @@ X5 -0.0031247916
 		Any code you have written (using Matlab, R, Weka’s Java API)
 	\end{itemize}
 
-	\section{Question 3 [10 Points (6 + 4)] - Multi-Class Classiﬁcation}
+	\section{Question 3 [10 Points (6 + 4)] - Multi-Class Classification}
 
 
 	An electronic nose is a device that can ``sniff'' gases at various locations. One way to construct the devise is using an array of $N$ semiconductors, each of which will have a different voltage response when in contact with certain gases. Each semiconductor responds to at least one gas (i.e., more than one gas). Let us assume that there are 3 gases A, B and C. Some locations can have either one of the gases or a mixture of gases. Thus, possible class labels are: A, B, C, AB, AC, BC, ABC.
@@ -239,13 +241,19 @@ X5 -0.0031247916
 		If you are allowed to use only an Artiﬁcial Neural Network, which of the following con-ﬁgurations are possible? State why or why not.
 		\begin{itemize}
 			\item
-			1 network with 7 output nodes
+			1 network with 7 output nodes.
+
+			This would be the simple choice. The output nodes would be $A, B, C, AB, AC, BC, ABC$. Thus this configuration is possible. We have to keep in mind here the fact that if we decide to say a gas is present if the confidence of the presence of that gas is above say 60\%. Then in that case at a place X if we see that gas A is present with 90\% confidence and both B and C are present with say 62\% confidence. Then though we are almost sure that A is present 
 
 			\item
 			One-vs-All
 
+			This is again possible if we are trying to find presence of one vs others etc. So it could be $A$ present vs $A$ not present or maybe $AC$ present vs $AC$ not present
+
 			\item
 			1 network with only 3 output nodes
+
+			This is possible if the required output can be defined or grouped into 3 groups. One example would be presence of \{one gas,two gases, 3 gases\} i.e $\{\{A,B,C\},\{AB,AC,AC\},\{ABC\}\}$
 		\end{itemize}
 
 		\item
@@ -253,7 +261,7 @@ X5 -0.0031247916
 
 	\end{enumerate}
 
-	\section{Question 4 [8 Points] - Hyperplanes for Classiﬁcation}
+	\section{Question 4 [8 Points] - Hyperplanes for Classification}
 
 	Consider $N$ points in a D-dimensional space, some of which are positive and some of which are negative. We all know that for $N = 2$ points in $d = 1$ dimensions, a line can separate positive and negative examples. Based on this, state whether a similar linear separator is possible for each of the following cases. If a linear separator is not possible, give an example and state conditions that must be satisﬁed for the existence of a linear classiﬁer. The correct answer to this question considers all possible arrangements of the N points in the D-dimensional space. If a linear separator is not possible for even one such arrangement, your answer should state that case as an example for failure and state the conditions when a linear separator is possible.
 	\begin{itemize}
