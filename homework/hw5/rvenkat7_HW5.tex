@@ -1272,13 +1272,49 @@ public class WekaCode {
 		\item
 		N=3, D=2
 
+		Usually as long the points dont lie on the same line it shoudl be possible to separate them in this case.
+
+		\begin{figure}[H]
+			\begin{center}
+				\includegraphics[scale=1.0]{resources/q4_img1.png}
+				\caption{N=3, D=2}
+			\end{center}
+		\end{figure}
+
 		\item
 		N=4, D=2
+
+		Simple put any variation of XOR where the points are kept in roughly the same configuration but move away or closer but the overall is a skew of XOR CANNOT be separated by a line. However if 2 or more points come together on one side and the other point(s) remians on the other side they can be separated.
+
+		\begin{figure}[H]
+			\begin{center}
+				\includegraphics[scale=1.0]{resources/q4_img2.png}
+				\caption{N=3, D=2}
+			\end{center}
+		\end{figure}
 
 		\item
 		N=4, D=3
 
+		As long all points dont lie on the same plane it should be able to separate them in this case.
+
+		\begin{figure}[H]
+			\begin{center}
+				\includegraphics[scale=1.0]{resources/q4_img3.png}
+				\caption{N=3, D=2}
+			\end{center}
+		\end{figure}
+
 		\item
 		N=5, D=3
+
+		3 points define a plane. if the there are 4 positive and 1 negative. 3 of the positive form a plane. if the negative is between the plane and the other positive its not possible to separate them. If there are 3 of one type and 2 of the other. The only case where it is not possible to separate them would be when the 3 of one type form a plane and the other type are on either side of the plane.
+
+		\begin{figure}[H]
+			\begin{center}
+				\includegraphics[scale=1.0]{resources/q4_img4.png}
+				\caption{N=3, D=2}
+			\end{center}
+		\end{figure}
 	\end{itemize}
 \end{document}
