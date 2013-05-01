@@ -15,6 +15,7 @@
 \usepackage{amsmath,amsfonts,amsthm}										% Math packages
 \usepackage[pdftex]{graphicx}														% Enable pdflatex
 \usepackage{url}
+\usepackage{listings}
 
 
 %%% Custom sectioning (sectsty package)
@@ -26,7 +27,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancyplain}
 \fancyhead{}														% No page header
-\fancyfoot[L]{\small \url{rvenkat7}}		% You may remove/edit this line 
+\fancyfoot[L]{\small \url{rvenkat7@ncsu.edu}}		% You may remove/edit this line 
 \fancyfoot[C]{}													% Empty
 \fancyfoot[R]{\thepage}									% Pagenumbering
 \renewcommand{\headrulewidth}{0pt}			% Remove header underlines
@@ -46,7 +47,7 @@
 \title{
 		%\vspace{-1in} 	
 		\usefont{OT1}{bch}{b}{n}
-		\normalfont \normalsize \textsc{Dept of Computer Science at North Carolina State University} \\ [25pt]
+		\normalfont \normalsize \textsc{Department of Computer Science at North Carolina State University} \\ [25pt]
 		\horrule{0.5pt} \\[0.4cm]
 		\huge CSC 522 - Project Report \\
 		\horrule{2pt} \\[0.5cm]
@@ -74,7 +75,7 @@ By the end of this project I had hoped to gain more perspective into different k
 
 \section{Literature Review}
 
-When trying to predict prices for an object we are dealing with a continuous scale of possible values. Regression would be an ideal way to predict values. While working with R and trying to predict prices of the equipment I came across several packages which use a variety of techniques for this purpose. One of the successful techniques was a method called 'gbm (Gradient Boosting Machine)'
+When trying to predict prices for an object we are dealing with a continuous scale of possible values. Regression would be an ideal way to predict values. While working with R and trying to predict prices of the equipment I came across several packages which use a variety of techniques for this purpose. One of the successful techniques was a method called `gbm (Gradient Boosting Machine)'
 
 Let us first try and work on understanding the different terminologies as a whole before jumping into how gbm works.
 
@@ -99,7 +100,7 @@ GBM works by constructing a number of trees. The number of trees that are constr
 
 One of the other parameters that is used to work with gbm is known as interaction depth. It is basically what level of interaction between attributes should be accommodated. In a usual regression model we only consider interaction between attributes at one level. However gbm goes one level further and does this at more than one level.
 
-One should also remember that interaction depth does not necessarily specify that there are exactly n interactions, but rather up to 'n' interactions
+One should also remember that interaction depth does not necessarily specify that there are exactly n interactions, but rather up to `n' interactions
 
 Another attribute that gbm uses is known as shrinkage. This particular parameter is used to specify at what rate gbm learns. Usually it is seen that lower the rate, better the model that is created. But we are capped because the lower the rate is the longer it takes for the model to be constructed. so we have to achieve a balance between time taken to construct a model and the accuracy of the model itself. However this doesn't mean that as shrinkage tends to 0 that the model becomes 100\% accurate. It just means that upto a certain point reducing shrinkage will result in longer times but better accuracy.
 
@@ -210,7 +211,7 @@ The next step involves training and creating a data model which we can use to ma
 
 While working on this project we faced a couple of issues.
 
-One of the major issues I faced while trying to build a model was the lack of proper computing power. Given the size of the size of the data set, running training on such huge models seems to require a lot of time as well as a huge amount of computing power. One should further note that since running R in parallel is not exactly a very elegant solution we notice that R seems to work only serially. Further when I say “compute power”, it is noticeable that a large amount of memory (RAM) is what is required. 
+One of the major issues I faced while trying to build a model was the lack of proper computing power. Given the size of the size of the data set, running training on such huge models seems to require a lot of time as well as a huge amount of computing power. One should further note that since running R in parallel is not exactly a very elegant solution we notice that R seems to work only serially. Further when I say ``compute power'', it is noticeable that a large amount of memory (RAM) is what is required. 
 
 Another issue I faced was that since the time line of the competition was structured in such a way that the test data was released only toward the very end of the competition and also that we did not obtain scores for our predictions on the test set till the 20th of April, I used to train my model on Train.csv and test on the validation data set Valid.csv for most part of the project. Toward the end of the project I retrained on the both the train and validation data set together and submitted to kaggle. I received a RMSLE score of about 0.28. 
 
@@ -218,7 +219,7 @@ Another issue I faced was that since the time line of the competition was struct
 
 Considering that we are trying to predict price which is a varying continuous quantity we would be using regression techniques. The models that I used to create models are rpart, gbm, randomForest etc.
 
-The software I used are R (for creating the models) and excel while working with the data.
+The software I used are R (for creating the models) and excel while working with the data. While looking up and learning about various models which can perform regression using R some of theme seemed to stand out prominently for their approach and their results. Some stood out because they were the simple models which performed regression. I decided to try using these models to create my models and predict the prices for the blue-book competition
 
 \subsubsection{caret}
 
@@ -266,7 +267,7 @@ One of the other techniques I used when trying to create a model is known as rpa
 
 rpart stands for recursive partitioning and regression trees. A regression tree is a technique where a decision tree is constructed to predict values for a given set of data. The more common techniques see construction of trees for classification purposes as opposed to regression. Consider a case where linear regression is used to predict values. The number of attributes which depend on each other can increase. As the dependency between attributes increases simple regression becomes harder use. This is where a regression tree comes of use. 
 
-The parameter I tuned for improving my results with rpart was cp. Where cp stands for complexity parameter. This parameter simply means that rpart will prune out any branch of the tree that doesn’t improve the fit by at least cp. Now i started with a cp of 0.01. I noticed that as I reduced cp my CV score on RMSLE improved. Finally with one of the scores I submitted to the kaggle leaderboard.
+The parameter I tuned for improving my results with rpart was cp. Where cp stands for complexity parameter. This parameter simply means that rpart will prune out any branch of the tree that doesn't improve the fit by at least cp. Now i started with a cp of 0.01. I noticed that as I reduced cp my CV score on RMSLE improved. Finally with one of the scores I submitted to the kaggle leaderboard.
 
 The results I obtained are as follows.
 
@@ -279,7 +280,7 @@ cp & CV & Comment \\ \hline
 0.00001 & 0.259 & \\ \hline
 \end{tabular} \end{center}
 
-The results can easily be understood. when cp is 0.01 the technique prunes of a split which doesn’t improve the fit by at least 0.01. This means that any fit which doesn’t cause a 10\% improvement is forgotten and discarded. This means we are losing quite a bit of splits because we expect quite a bit of improvement. We reduce this value from 10\% to 1\% in the next stage and we see that the CV score improves. We reduce the cp value from 1\% to .1\% and finally to .01\%.
+The results can easily be understood. when cp is 0.01 the technique prunes of a split which doesn't improve the fit by at least 0.01. This means that any fit which doesn't cause a 10\% improvement is forgotten and discarded. This means we are losing quite a bit of splits because we expect quite a bit of improvement. We reduce this value from 10\% to 1\% in the next stage and we see that the CV score improves. We reduce the cp value from 1\% to .1\% and finally to .01\%.
 
 One should note that if we keep reducing cp thinking that we would get a very great result, it might not necessarily be the case. This would be because we over fit for the training data.
 
@@ -313,6 +314,68 @@ I achieved a leaderboard position of 80 in the competition and used gbm for this
 
 Based on some of the analysis done for this data set I can also comment that R, though a very easy language to work with, does not scale really well. It is noticeable that it does not support parallel processing in an elegant manner and the methods that do exist to achieve this are just ``hacks'' to achieve this.
 
+\section{Appendix}
+
+The following is a piece of code that I used to train a model using rpart. Similar techniques were used for the other code as well.
+
+\begin{lstlisting}[language=C,frame=single]
+train <- read.csv(file.choose())
+
+X <- data.frame( SaleDay=train$SaleDay ,
+	SaleMonth=train$SaleMonth ,SaleYear=train$SaleYear,
+	Thumb=train$Thumb,MfgYear=train$MfgYear,
+	Forks=train$Forks,Drive_System=train$Drive_System , 
+	UsageBand=train$UsageBand,
+	state=train$state,Stick=train$Stick ,
+	fiModelDesc=train$fiModelDesc,
+	Transmission=train$Transmission,
+	MachineHoursCurrentMeter=train$MachineHoursCurrentMeter,
+	Pad_Type=train$Pad_Type,ProductSize=train$ProductSize,
+	 ProductGroupDesc=train$ProductGroupDesc,
+	Turbocharged=train$Turbocharged,
+	Ride_Control=train$Ride_Control,Enclosure=train$Enclosure, 
+	fiManufacturerID=train$fiManufacturerID, 
+	ModelID=train$ModelID,fiProductClassDesc=train$fiProductClassDesc,
+	fiSecondaryDesc=train$ fiSecondaryDesc,
+	PrimaryLower=train$PrimaryLower,
+	fiBaseModel=train$fiBaseModel,
+	PrimaryUpper=train$PrimaryUpper,Tire_Size=train$Tire_Size)
+
+X$MachineHoursCurrentMeter[is.na(X$MachineHoursCurrentMeter) ] <- 0
+X$MfgYear[is.na(X$MfgYear) ] <- -1
+X$PrimaryLower[is.na(X$PrimaryLower) ] <- -1
+X$PrimaryUpper[is.na(X$PrimaryUpper) ] <- -1
+
+Y <- as.numeric(results$SalePrice)
+Y <- log(Y,exp(1))
+crtl <- trainControl(method = "cv", number = 5)
+ 
+cpList <- expand.grid(.cp = c(0.0001))
+ 
+mydata <- cbind(Y,X)
+ 
+tree <- train(Y~.,data=X,method="rpart",trControl=crtl,tuneGrid=cpList)
+
+#####prediction
+
+valid <- read.csv(file.choose())
+
+X_test$MachineHoursCurrentMeter[
+			is.na(X_test$MachineHoursCurrentMeter) ] <- 0
+X_test$MfgYear[is.na(X_test$MfgYear) ] <- -1
+X_test$PrimaryLower[is.na(X_test$PrimaryLower) ] <- -1
+X_test$PrimaryUpper[is.na(X_test$PrimaryUpper) ] <- -1
+ 
+ 
+predictions <- predict(tree, newdata=X_test)
+pred2 <- exp(1)^predictions
+out <- cbind(valid$SalesID,pred2)
+out2<-data.frame(out)
+write.csv(out2, file="D:\\rpart_try1.csv")
+
+
+\end{lstlisting}
+
 \section{References}
 
 \begin{enumerate}
@@ -321,7 +384,7 @@ G. Ridgeway. Generalized boosted models: A guide to the gbm package. \\
 https://gradientboostedmodels.googlecode.com/git/gbm/inst/doc/gbm.pdf .Last accessed on April 25.
 
 \item
-J.H. Friedman (2002). “Stochastic Gradient Boosting,” Computational Statistics and Data Analysis 38(4):367-378.
+J.H. Friedman (2002). ``Stochastic Gradient Boosting,'' Computational Statistics and Data Analysis 38(4):367-378.
 
 \item
 http://cran.r-project.org/web/packages/gbm/index.html . Last visited on April 25
